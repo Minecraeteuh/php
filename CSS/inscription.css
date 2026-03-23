@@ -1,0 +1,123 @@
+/* Variables de couleurs type "Cinéma" */
+:root {
+    --primary-color: #e50914; /* Rouge Netflix */
+    --bg-dark: #141414;
+    --card-bg: #1f1f1f;
+    --text-color: #ffffff;
+    --input-bg: #333333;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-color);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Conteneur principal */
+.register-container {
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.5);
+    width: 100%;
+    max-width: 450px;
+}
+
+h1 {
+    margin: 0 0 10px;
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 2rem;
+}
+
+.subtitle {
+    text-align: center;
+    color: #8c8c8c;
+    margin-bottom: 30px;
+}
+
+/* Groupes d'input */
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--input-bg);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+input:focus {
+    outline: 2px solid var(--primary-color);
+    background-color: #454545;
+}
+
+/* Bouton */
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #b2070f;
+    transform: translateY(-2px);
+}
+
+.footer-text {
+    text-align: center;
+    margin-top: 25px;
+    color: #8c8c8c;
+    font-size: 0.9rem;
+}
+
+.footer-text a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-text a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive : Tablette et Mobile */
+@media (max-width: 480px) {
+    .register-container {
+        padding: 25px;
+    }
+    
+    h1 {
+        font-size: 1.6rem;
+    }
+}
