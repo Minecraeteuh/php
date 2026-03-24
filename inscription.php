@@ -11,7 +11,7 @@
         <h1>Créer un compte</h1>
         <p class="subtitle">Rejoignez la communauté IMDb & co</p>
         
-        <form action="traitement.php" method="post">
+        <form action="traitement_inscription.php" method="post">
             <div class="input-group">
                 <label for="nom">Nom</label>
                 <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
@@ -23,7 +23,7 @@
             </div>
 
             <div class="input-group">
-                <label for="username">Nom d'utilisateur</label>
+                <label for="username">Pseudo</label>
                 <input type="text" id="username" name="username" placeholder="Pseudo" required>
             </div>
 
@@ -40,42 +40,7 @@
             <button type="submit" name="ok" class="btn-submit">S'inscrire</button>
         </form>
         
-        <p class="footer-text">Déjà inscrit ? <a href="login.php">Connectez-vous</a></p>
+        <p class="footer-text">Déjà inscrit ? <a href="connexion.php">Connectez-vous</a></p>
     </div>
 </body>
 </html>
-
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Récupérer les données du formulaire
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-
-        // Valider les données (exemple simple)
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            echo "<p style='color:red;'>Adresse email invalide.</p>";
-            exit;
-        }
-
-        // Hash du mot de passe
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-        // Connexion à la base de données (exemple avec PDO)
-        try {
-            $pdo = new PDO('mysql:host=localhost;dbname=your_database', 'username', 'password');
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            // Insérer les données dans la base de données
-            $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
-            $stmt->bindParam(':username', $username);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':password', $hashed_password);
-            $stmt->execute();
-
-            echo "<p style='color:green;'>Inscription réussie!</p>";
-        } catch (PDOException $e) {
-            echo "<p style='color:red;'>Erreur: " . $e->getMessage() . "</p>";
-        }
-    }
-    ?>

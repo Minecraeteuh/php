@@ -20,8 +20,8 @@ if (isset ($_POST['ok'])){
     $password = $_POST['password'];
 
     // On liste les colonnes pour être sûr de ne pas se tromper
-    $requete = $bdd->prepare("INSERT INTO users (pseudo, nom, prenom, motDePasse, email) 
-                            VALUES (:pseudo, :nom, :prenom, :motDePasse, :email)");
+    $requete = $bdd->prepare("INSERT INTO users (pseudo, nom, prenom, motDePasse, email, '') 
+                            VALUES (:pseudo, :nom, :prenom, :motDePasse, :email, '')");
 
     $requete->execute(
         array(
