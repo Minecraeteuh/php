@@ -1,10 +1,12 @@
+//* traitement_inscription.php */
 <?php
 $servername = "localhost";
 $username = "root";
 $password = "kanken";
+$dbname = "utilisateurs";
 
 try{
-    $bdd = new PDO("mysql:host=$servername;dbname=utilisateurs", $username, $password);
+    $bdd = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 catch(PDOException $e){
@@ -12,20 +14,18 @@ catch(PDOException $e){
 }
 
 if (isset ($_POST['ok'])){
-    // pour voir si ca bug pour la recup des données var_dump($_POST);
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // On liste les colonnes pour être sûr de ne pas se tromper
-    $requete = $bdd->prepare("INSERT INTO users (pseudo, nom, prenom, motDePasse, email, '') 
-                            VALUES (:pseudo, :nom, :prenom, :motDePasse, :email, '')");
+    $requete = $bdd->prepare("INSERT INTO users (pseudo, nom, prenom, motDePasse, email ) 
+                            VALUES (:pseudo, :nom, :prenom, :motDePasse, :email)");
 
     $requete->execute(
         array(
-            ':pseudo'     => $username, // J'utilise ton $username pour la colonne pseudo
+            ':pseudo'     => $username, 
             ':nom'        => $nom,
             ':prenom'     => $prenom,
             ':motDePasse' => $password,

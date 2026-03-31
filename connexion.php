@@ -1,3 +1,4 @@
+//* connexion.php */
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -29,13 +30,11 @@
         <p class="footer-text">Pas encore de compte ? <a href="inscription.php">Inscrivez-vous</a></p>
     </div>
 
-    <?php
-    if($error_msg){
-        ?>
-        <p style="color:red;"><?php echo $error_msg; ?></p>
-        <?php
-    }
-    ?>
+   <?php
+if(isset($_GET['error'])) {
+    echo '<p style="color:red;">Email ou mot de passe incorrect.</p>';
+}
+?>
 
 
 
