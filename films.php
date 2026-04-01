@@ -11,34 +11,27 @@ try {
 } catch(PDOException $e) {
     die("Erreur : " . $e->getMessage());
 }
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Catégories - IMDb & co</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tous les Films</title>
     <link rel="stylesheet" href="CSS/categorie.css">
 </head>
 <body>
     <header>
-        <h1>IMDb & co</h1>
+        <h1>Nos Films</h1>
         <nav>
             <ul>
                 <li><a href="index.php">Accueil</a></li>
                 <li><a href="recherche.php">Rechercher</a></li>
+                <li><a href="categorie.php">Catégories</a></li>
                 <li><a href="panier.php">Panier</a></li>
             </ul>
         </nav>
     </header>
-
-    <main class="container">
-        <h2>Nos Catégories</h2>
-        <p>Explorez nos différentes catégories de films.</p>
-        <div class="categories">
-            <button class="categorie-card"><a href="filmsAction.php">Action</a></button>
-            <button class="categorie-card"><a href="filmsDrame.php">Drame</a></button>
-        </div>
-    </main>
 </body>
 </html>

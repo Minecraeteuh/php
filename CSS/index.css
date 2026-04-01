@@ -1,4 +1,193 @@
-        .search-box { background: #1f1f1f; padding: 20px; border-radius: 10px; margin-bottom: 30px; }
-        .search-box input[type="text"] { width: 70%; padding: 10px; border-radius: 5px; border: none; }
-        .search-box select { padding: 10px; border-radius: 5px; }
-        .no-results { color: #8c8c8c; text-align: center; margin-top: 20px; }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&display=swap');
+
+:root {
+    --netflix-red: #E50914;
+    --bg-black: #0f0f0f;
+    --card-bg: #181818;
+    --text-white: #ffffff;
+    --text-gray: #a3a3a3;
+    --transition: all 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-black);
+    color: var(--text-white);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+/* --- NAVIGATION MODERNE --- */
+.netflix-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    position: fixed;
+    top: 0; width: 100%; z-index: 1000;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+    backdrop-filter: blur(5px);
+}
+
+.logo {
+    color: var(--netflix-red);
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+}
+
+.nav-links a {
+    color: var(--text-white);
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.8;
+    transition: var(--transition);
+}
+
+.nav-links a:hover { opacity: 1; color: var(--netflix-red); }
+
+/* --- HERO BANNER --- */
+.hero-banner {
+    position: relative;
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; width: 100%; height: 30%;
+    background: linear-gradient(to top, var(--bg-black), transparent);
+}
+
+.hero-content {
+    max-width: 600px;
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.hero-btns .btn-play {
+    background: var(--text-white);
+    color: black;
+    padding: 12px 35px;
+    border-radius: 6px;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition);
+}
+
+.hero-btns .btn-play:hover { transform: scale(1.05); background: #e6e6e6; }
+
+/* --- GRID DE FILMS (LE CŒUR DU DESIGN) --- */
+.main-content {
+    padding: 0 5% 100px;
+    margin-top: -80px;
+    position: relative;
+    z-index: 10;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-white);
+}
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+    margin-bottom: 50px;
+}
+
+.movie-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    transition: var(--transition);
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.movie-card img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+/* Effet au survol du film */
+.movie-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(229, 9, 20, 0.3);
+}
+
+.movie-card:hover img {
+    filter: brightness(0.4);
+}
+
+.card-details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    transform: translateY(20px);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.movie-card:hover .card-details {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.card-details h3 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.card-details .price {
+    color: var(--netflix-red);
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+.btn-add-mini {
+    display: block;
+    margin-top: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 0.8rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 5px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.btn-add-mini:hover { background: var(--netflix-red); border-color: var(--netflix-red); }

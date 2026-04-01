@@ -12,28 +12,20 @@ try {
     die("Erreur de connexion : " . $e->getMessage());
 }
 
-
 $user_pseudo = "Visiteur";
 if (isset($_COOKIE['email']) && isset($_COOKIE['token'])) {
     $reqUser = $bdd->prepare("SELECT pseudo FROM users WHERE email = :email AND token = :token");
     $reqUser->execute(['email' => $_COOKIE['email'], 'token' => $_COOKIE['token']]);
     $user = $reqUser->fetch();
-    if ($user) {
-        $user_pseudo = htmlspecialchars($user['pseudo']);
-    }
+    if ($user) { $user_pseudo = htmlspecialchars($user['pseudo']); }
 }
 
+// On récupère 6 films aléatoires pour les tendances et les 6 derniers pour les nouveautés
+$populaires = $bdd->query("SELECT * FROM films ORDER BY RAND() LIMIT 6")->fetchAll(PDO::FETCH_ASSOC);
+$nouveautes = $bdd->query("SELECT * FROM films ORDER BY Sortie DESC LIMIT 6")->fetchAll(PDO::FETCH_ASSOC);
 
-try {
-    $reqPopulaires = $bdd->query("SELECT * FROM movie ORDER BY views DESC LIMIT 3");
-    $populaires = $reqPopulaires->fetchAll(PDO::FETCH_ASSOC);
-
-    $reqNouveautes = $bdd->query("SELECT * FROM movie ORDER BY id DESC LIMIT 3");
-    $nouveautes = $reqNouveautes->fetchAll(PDO::FETCH_ASSOC);
-} catch (Exception $e) {
-    $populaires = [];
-    $nouveautes = [];
-}
+// Le film de la grande bannière (le premier des populaires)
+$hero = $populaires[0] ?? null;
 ?>
 
 <!DOCTYPE html>
@@ -41,79 +33,72 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil - IMDb & co</title>
+    <title>Netflix Clone - IMDb & co</title>
     <link rel="stylesheet" href="CSS/index.css">
 </head>
-<body>
-    <header>
-        <div class="nav-container">
-            <h1>IMDb & co</h1>
-            <nav>
-                <ul>
-                    <li><a href="index.php">Accueil</a></li>
-                    <li><a href="recherche.php">Recherche</a></li>
-                    <li><a href="Categorie.php">Catégories</a></li>
-                    <li><a href="panier.php">🛒 Panier</a></li>
-                    <?php if($user_pseudo != "Visiteur"): ?>
-                        <li><a href="profil.php" class="user-link">👤 Ton profil: <?php echo $user_pseudo; ?></a></li>
-                        <li><a href="deconnexion.php" class="btn-logout">Déconnexion</a></li>
-                    <?php else: ?>
-                        <li><a href="connexion.php" class="btn-login">Connexion</a></li>
-                    <?php endif; ?>
-                </ul>
-            </nav>
+<body class="netflix-body">
+
+    <header class="netflix-header">
+        <div class="logo">IMDb & co</div>
+        <nav class="main-nav">
+            <a href="index.php">Accueil</a>
+            <a href="recherche.php">Recherche</a>
+            <a href="Categorie.php">Catégories</a>
+        </nav>
+        <div class="user-nav">
+            <a href="panier.php" class="icon">🛒</a>
+            <?php if($user_pseudo != "Visiteur"): ?>
+                <span class="pseudo">👤 <?php echo $user_pseudo; ?></span>
+                <a href="deconnexion.php" class="btn-logout">Quitter</a>
+            <?php else: ?>
+                <a href="connexion.php" class="btn-red">S'identifier</a>
+            <?php endif; ?>
         </div>
     </header>
 
-    <main class="container">
-        <section class="hero">
-            <h2>Bienvenue <?php echo $user_pseudo; ?> !</h2>
-            <p>Découvrez les meilleurs films du moment.</p>
-        </section>
+    <?php if ($hero): ?>
+    <section class="hero-section" style="background-image: linear-gradient(to top, #141414, transparent), url('img/<?php echo $hero['image']; ?>');">
+        <div class="hero-info">
+            <h1 class="hero-title"><?php echo htmlspecialchars($hero['titre']); ?></h1>
+            <p class="hero-description"><?php echo htmlspecialchars(substr($hero['description'], 0, 150)); ?>...</p>
+            <div class="hero-buttons">
+                <a href="details.php?id=<?php echo $hero['id']; ?>" class="btn-white">▶ Lecture</a>
+                <a href="ajouter_panier.php?id=<?php echo $hero['id']; ?>" class="btn-gray">🛒 + Panier</a>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
 
-        <section class="movie-section">
-            <h2>🔥 Nos films populaires</h2>
-            <div class="movie-grid">
-                <?php if (!empty($populaires)): ?>
-                    <?php foreach($populaires as $film): ?>
-                        <div class="movie-card">
-                            <img src="img/<?php echo $film['image']; ?>" alt="<?php echo $film['titre']; ?>">
-                            <h3><?php echo $film['titre']; ?></h3>
-                            <p class="price"><?php echo $film['prix']; ?> €</p>
-                            <div class="actions">
-                                <a href="details.php?id=<?php echo $film['id']; ?>" class="btn-details">Détails</a>
-                                <a href="ajouter_panier.php?id=<?php echo $film['id']; ?>" class="btn-add">🛒 +</a>
+    <main class="content-rows">
+        <section class="row">
+            <h2 class="row-title">Tendances actuelles</h2>
+            <div class="row-posters">
+                <?php foreach($populaires as $f): ?>
+                    <div class="poster-container">
+                        <a href="details.php?id=<?php echo $f['id']; ?>">
+                            <img src="img/<?php echo $f['image']; ?>" alt="<?php echo $f['titre']; ?>" class="poster">
+                            <div class="poster-info">
+                                <span><?php echo $f['prix']; ?>€</span>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p class="empty-msg">Bientôt disponible... (Remplissez la table 'movies')</p>
-                <?php endif; ?>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </section>
 
-        <section class="movie-section">
-            <h2>✨ Nos nouveaux films</h2>
-            <div class="movie-grid">
-                <?php if (!empty($nouveautes)): ?>
-                    <?php foreach($nouveautes as $film): ?>
-                        <div class="movie-card">
-                            <h3><?php echo $film['titre']; ?></h3>
-                            <p class="price"><?php echo $film['prix']; ?> €</p>
-                            <a href="details.php?id=<?php echo $film['id']; ?>" class="btn-details">Détails</a>
-                            <a href="ajouter_panier.php?id=<?php echo $film['id']; ?>" class="btn-add">Ajouter</a>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <div class="movie-card placeholder">
-                        <div class="img-placeholder">IMAGE</div>
-                        <h3>Film Démo</h3>
-                        <p class="price">9.99 €</p>
-                        <button class="btn-add" disabled>Ajouter</button>
+        <section class="row">
+            <h2 class="row-title">Nouveautés</h2>
+            <div class="row-posters">
+                <?php foreach($nouveautes as $f): ?>
+                    <div class="poster-container">
+                        <a href="details.php?id=<?php echo $f['id']; ?>">
+                            <img src="img/<?php echo $f['image']; ?>" alt="<?php echo $f['titre']; ?>" class="poster">
+                        </a>
                     </div>
-                <?php endif; ?>
+                <?php endforeach; ?>
             </div>
         </section>
     </main>
+
 </body>
 </html>
