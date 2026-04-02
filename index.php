@@ -75,10 +75,12 @@ $hero = $populaires[0] ?? null;
             <div class="row-posters">
                 <?php foreach($populaires as $f): ?>
                     <div class="poster-container">
-                        <a href="details.php?id=<?php echo $f['id']; ?>">
+                        <a href="film_details.php?id=<?php echo $f['id']; ?>">
                             <img src="img/<?php echo $f['image']; ?>" alt="<?php echo $f['titre']; ?>" class="poster">
                             <div class="poster-info">
                                 <span><?php echo $f['prix']; ?>€</span>
+                                <button class="btn-gray">🛒 + Panier</button>
+                                <a href="film_details.php?id=<?php echo $f['id']; ?>" class="btn-details">Détails</a>
                             </div>
                         </a>
                     </div>
@@ -91,8 +93,13 @@ $hero = $populaires[0] ?? null;
             <div class="row-posters">
                 <?php foreach($nouveautes as $f): ?>
                     <div class="poster-container">
-                        <a href="details.php?id=<?php echo $f['id']; ?>">
+                        <a href="film_details.php?id=<?php echo $f['id']; ?>">
                             <img src="img/<?php echo $f['image']; ?>" alt="<?php echo $f['titre']; ?>" class="poster">
+                            <div class="poster-info">
+                                <span><?php echo $f['prix']; ?>€</span>
+                                <button class="btn-gray">🛒 + Panier</button>
+                                <a href="film_details.php?id=<?php echo $f['id']; ?>" class="btn-details">Détails</a>
+                            </div>
                         </a>
                     </div>
                 <?php endforeach; ?>
