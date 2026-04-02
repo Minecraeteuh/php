@@ -113,7 +113,7 @@ if (isset($_GET['query']) && !empty(trim($_GET['query']))) {
                         <p><strong>Année :</strong> <?php echo htmlspecialchars($film['Sortie']); ?></p>
                         <p><em><?php echo htmlspecialchars(substr($film['description'], 0, 100)); ?>...</em></p>
                         <p class="price"><?php echo number_format($film['prix'], 2); ?> €</p>
-                        <a href="details.php?id=<?php echo $film['id']; ?>" class="btn-details">Voir détails</a>
+                        <a href="film_details.php?id=<?php echo $film['id']; ?>" class="btn-details">Voir détails</a>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>

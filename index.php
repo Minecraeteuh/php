@@ -62,7 +62,7 @@ $hero = $populaires[0] ?? null;
             <h1 class="hero-title"><?php echo htmlspecialchars($hero['titre']); ?></h1>
             <p class="hero-description"><?php echo htmlspecialchars(substr($hero['description'], 0, 150)); ?>...</p>
             <div class="hero-buttons">
-                <a href="details.php?id=<?php echo $hero['id']; ?>" class="btn-white">▶ Lecture</a>
+                <a href="film_details.php?id=<?php echo $hero['id']; ?>" class="btn-white">▶ Lecture</a>
                 <a href="ajouter_panier.php?id=<?php echo $hero['id']; ?>" class="btn-gray">🛒 + Panier</a>
             </div>
         </div>
@@ -75,7 +75,7 @@ $hero = $populaires[0] ?? null;
             <div class="row-posters">
                 <?php foreach($populaires as $f): ?>
                     <div class="poster-container">
-                        <a href="details.php?id=<?php echo $f['id']; ?>">
+                        <a href="film_details.php?id=<?php echo $f['id']; ?>">
                             <img src="img/<?php echo $f['image']; ?>" alt="<?php echo $f['titre']; ?>" class="poster">
                             <div class="poster-info">
                                 <span><?php echo $f['prix']; ?>€</span>
@@ -91,7 +91,7 @@ $hero = $populaires[0] ?? null;
             <div class="row-posters">
                 <?php foreach($nouveautes as $f): ?>
                     <div class="poster-container">
-                        <a href="details.php?id=<?php echo $f['id']; ?>">
+                        <a href="film_details.php?id=<?php echo $f['id']; ?>">
                             <img src="img/<?php echo $f['image']; ?>" alt="<?php echo $f['titre']; ?>" class="poster">
                         </a>
                     </div>
