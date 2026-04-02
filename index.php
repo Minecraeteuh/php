@@ -99,6 +99,10 @@ $hero = $populaires[0] ?? null;
             </div>
         </section>
     </main>
-
+     <script>
+      window.addEventListener('scroll', () => {
+        document.querySelector('.netflix-header').classList.toggle('bg-solid', window.scrollY > 40);
+      });
+    </script>
 </body>
 </html>
