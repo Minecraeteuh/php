@@ -2,8 +2,8 @@
 session_start();
 $servername = "localhost";
 $username = "root";
-$password = "kanken";
-$dbname = "utilisateurs";
+$password = "root";
+$dbname = "movie";
 
 try {
     $bdd = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);

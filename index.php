@@ -2,7 +2,7 @@
 session_start(); 
 $servername = "localhost";
 $username = "root";
-$password = "kanken";
+$password = "root";
 $dbname = "utilisateurs"; 
 
 try {

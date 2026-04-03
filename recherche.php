@@ -4,7 +4,7 @@ session_start();
 // 1. Paramètres de connexion
 $servername = "localhost";
 $username = "root";
-$password = "kanken"; // Assure-toi que ce mot de passe est le bon dans Wamp
+$password = "root"; // Assure-toi que ce mot de passe est le bon dans Wamp
 $dbname = "utilisateurs";
 
 try {

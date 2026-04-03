@@ -4,7 +4,7 @@ session_start();
 // Connexion BDD (Identifiants inchangés)
 $servername = "localhost";
 $username = "root";
-$password = "kanken";
+$password = "root";
 $dbname = "utilisateurs";
 
 try {
