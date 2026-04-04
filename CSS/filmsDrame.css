@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --red: #E50914;
+  --red-dark: #B20710;
+  --dark: #141414;
+  --surface: #1f1f1f;
+  --text: #e5e5e5;
+  --text-muted: #999;
+  --radius: 4px;
+}
+
+body {
+  background-color: var(--dark);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── HEADER ─────────────────────────────────────────── */
+
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4%;
+  height: 68px;
+  background: rgba(20, 20, 20, 0.97);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem;
+  color: var(--red);
+  letter-spacing: 2px;
+}
+
+nav ul {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+nav ul a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+
+nav ul a:hover { color: #fff; }
+
+/* ── MAIN ────────────────────────────────────────────── */
+
+.container {
+  margin-top: 68px;
+  padding: 50px 4% 60px;
+}
+
+.container h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem;
+  letter-spacing: 3px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+}
+
+.empty {
+  color: var(--text-muted);
+  font-size: 15px;
+  padding: 60px 0;
+  text-align: center;
+}
+
+/* ── GRID ────────────────────────────────────────────── */
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 600px) {
+  .movie-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+}
+
+/* ── POSTER CARD ─────────────────────────────────────── */
+
+.poster-container {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--surface);
+  transition: transform 0.3s cubic-bezier(.25,.46,.45,.94), box-shadow 0.3s;
+}
+
+.poster-container:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.8);
+  z-index: 10;
+}
+
+.poster-container > a {
+  display: block;
+  position: relative;
+  text-decoration: none;
+}
+
+.poster-container img {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  display: block;
+  background: #222;
+  transition: filter 0.3s;
+}
+
+.poster-container:hover img {
+  filter: brightness(0.4);
+}
+
+/* ── OVERLAY ─────────────────────────────────────────── */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px 12px 14px;
+  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 55%);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.poster-container:hover .overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.overlay h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: 1px;
+  color: #fff;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.overlay p {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.price {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--red);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.card-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-cart,
+.btn-details {
+  flex: 1;
+  text-align: center;
+  padding: 7px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: var(--radius);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-cart {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.btn-cart:hover {
+  background: rgba(255,255,255,0.22);
+}
+
+.btn-details {
+  background: var(--red);
+  color: #fff;
+  border: 1px solid transparent;
+}
+.btn-details:hover {
+  background: var(--red-dark);
+}

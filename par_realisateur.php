@@ -4,7 +4,7 @@ session_start();
 // Connexion BDD (Identifiants inchangés)
 $servername = "localhost";
 $username = "root";
-$password = "root";
+$password = "kanken";
 $dbname = "utilisateurs";
 
 try {
@@ -81,7 +81,7 @@ $films = $reqFilms->fetchAll(PDO::FETCH_ASSOC);
                 <?php foreach ($films as $f): ?>
                     <div class="movie-card">
                         <a href="film_details.php?id=<?php echo $f['id']; ?>">
-                            <img src="img/<?php echo htmlspecialchars($f['image']); ?>" alt="<?php echo htmlspecialchars($f['titre']); ?>">
+                            <img src="assets/img/<?php echo htmlspecialchars($f['image']); ?>" alt="<?php echo htmlspecialchars($f['titre']); ?>">
                             <div class="card-details">
                                 <h3><?php echo htmlspecialchars($f['titre']); ?></h3>
                                 <p class="price"><?php echo $f['prix']; ?>€</p>

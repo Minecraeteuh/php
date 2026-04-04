@@ -3,7 +3,7 @@ session_start();
 
 $servername = "localhost";
 $username = "root";
-$password = "root";
+$password = "kanken";
 $dbname = "utilisateurs";
 
 try {
@@ -57,7 +57,7 @@ if (!$film) {
     <main class="details-container">
         <div class="details-content">
             <div class="details-image">
-                <img src="img/<?php echo htmlspecialchars($film['image']); ?>" alt="<?php echo htmlspecialchars($film['titre']); ?>">
+                <img src="assets/img/<?php echo htmlspecialchars($film['image']); ?>" alt="<?php echo htmlspecialchars($film['titre']); ?>">
             </div>
             
             <div class="details-info">

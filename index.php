@@ -1,16 +1,5 @@
 <?php
-session_start(); 
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "utilisateurs"; 
-
-try {
-    $bdd = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
-}
+require_once 'configphp.php';
 
 $user_pseudo = "Visiteur";
 if (isset($_COOKIE['email']) && isset($_COOKIE['token'])) {
@@ -20,11 +9,9 @@ if (isset($_COOKIE['email']) && isset($_COOKIE['token'])) {
     if ($user) { $user_pseudo = htmlspecialchars($user['pseudo']); }
 }
 
-// On récupère 6 films aléatoires pour les tendances et les 6 derniers pour les nouveautés
 $populaires = $bdd->query("SELECT * FROM films ORDER BY RAND() LIMIT 6")->fetchAll(PDO::FETCH_ASSOC);
 $nouveautes = $bdd->query("SELECT * FROM films ORDER BY Sortie DESC LIMIT 6")->fetchAll(PDO::FETCH_ASSOC);
 
-// Le film de la grande bannière (le premier des populaires)
 $hero = $populaires[0] ?? null;
 ?>
 
@@ -33,7 +20,7 @@ $hero = $populaires[0] ?? null;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netflix Clone - IMDb & co</title>
+    <title>IMDb & co</title>
     <link rel="stylesheet" href="CSS/index.css">
 </head>
 <body class="netflix-body">
@@ -57,12 +44,12 @@ $hero = $populaires[0] ?? null;
     </header>
 
     <?php if ($hero): ?>
-    <section class="hero-section" style="background-image: linear-gradient(to top, #141414, transparent), url('img/<?php echo $hero['image']; ?>');">
+    <section class="hero-section" style="background-image: linear-gradient(to top, #141414, transparent), url('assets/img/<?php echo $hero['image']; ?>');">
         <div class="hero-info">
             <h1 class="hero-title"><?php echo htmlspecialchars($hero['titre']); ?></h1>
             <p class="hero-description"><?php echo htmlspecialchars(substr($hero['description'], 0, 150)); ?>...</p>
             <div class="hero-buttons">
-                <a href="details.php?id=<?php echo $hero['id']; ?>" class="btn-white">▶ Lecture</a>
+                <a href="details.php?id=<?php echo $hero['id']; ?>" class="btn-white">Détails</a>
                 <a href="ajouter_panier.php?id=<?php echo $hero['id']; ?>" class="btn-gray">🛒 + Panier</a>
             </div>
         </div>
@@ -76,7 +63,7 @@ $hero = $populaires[0] ?? null;
                 <?php foreach($populaires as $f): ?>
                     <div class="poster-container">
                         <a href="film_details.php?id=<?php echo $f['id']; ?>">
-                            <img src="img/<?php echo $f['image']; ?>" alt="<?php echo $f['titre']; ?>" class="poster">
+                            <img src="assets/img/<?php echo $f['image']; ?>" alt="<?php echo $f['titre']; ?>" class="poster">
                             <div class="poster-info">
                                 <span><?php echo $f['prix']; ?>€</span>
                                 <button class="btn-gray">🛒 + Panier</button>
@@ -94,7 +81,7 @@ $hero = $populaires[0] ?? null;
                 <?php foreach($nouveautes as $f): ?>
                     <div class="poster-container">
                         <a href="film_details.php?id=<?php echo $f['id']; ?>">
-                            <img src="img/<?php echo $f['image']; ?>" alt="<?php echo $f['titre']; ?>" class="poster">
+                            <img src="assets/img/<?php echo $f['image']; ?>" alt="<?php echo $f['titre']; ?>" class="poster">
                             <div class="poster-info">
                                 <span><?php echo $f['prix']; ?>€</span>
                                 <button class="btn-gray">🛒 + Panier</button>

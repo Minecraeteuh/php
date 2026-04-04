@@ -4,7 +4,7 @@ session_start();
 // 1. Paramètres de connexion
 $servername = "localhost";
 $username = "root";
-$password = "root"; // Assure-toi que ce mot de passe est le bon dans Wamp
+$password = "kanken"; // Assure-toi que ce mot de passe est le bon dans Wamp
 $dbname = "utilisateurs";
 
 try {
@@ -49,29 +49,7 @@ if (isset($_GET['query']) && !empty(trim($_GET['query']))) {
 <head>
     <meta charset="UTF-8">
     <title>Recherche IMDb & co</title>
-    <link rel="stylesheet" href="CSS/index.css">
-    <style>
-        /* Style spécifique pour les cartes de recherche */
-        .movie-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 20px;
-        }
-        .movie-card {
-            background: #1a1a1a;
-            color: white;
-            border-radius: 10px;
-            padding: 15px;
-            border: 1px solid #333;
-            transition: transform 0.3s;
-        }
-        .movie-card:hover { transform: scale(1.02); border-color: #e50914; }
-        .movie-card h3 { color: #e50914; margin-top: 0; }
-        .price { font-weight: bold; color: #00d1b2; font-size: 1.2em; }
-        .search-container { background: #111; padding: 30px; text-align: center; }
-        .btn-details { display: inline-block; background: #e50914; color: white; padding: 8px 15px; text-decoration: none; border-radius: 5px; margin-top: 10px; }
-    </style>
+    <link rel="stylesheet" href="CSS/recherche.css">
 </head>
 <body>
 
@@ -107,7 +85,8 @@ if (isset($_GET['query']) && !empty(trim($_GET['query']))) {
         <?php if ($recherche_faite): ?>
             <?php if (!empty($resultats)): ?>
                 <?php foreach ($resultats as $film): ?>
-                    <div class="movie-card">
+                    <div class="poster-container">
+                        <img src="assets/img/<?php echo $film['image']; ?>" alt="<?php echo $film['titre']; ?>>
                         <h3><?php echo htmlspecialchars($film['titre']); ?></h3>
                         <p><strong>Réalisateur :</strong> <?php echo htmlspecialchars($film['nom_realisateur'] ?? 'Inconnu'); ?></p>
                         <p><strong>Année :</strong> <?php echo htmlspecialchars($film['Sortie']); ?></p>

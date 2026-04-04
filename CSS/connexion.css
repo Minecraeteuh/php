@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --red: #E50914;
+  --red-dark: #B20710;
+  --dark: #141414;
+  --dark-2: #1a1a1a;
+  --surface: #1f1f1f;
+  --text: #e5e5e5;
+  --text-muted: #999;
+  --radius: 4px;
+}
+
+body {
+  background-color: var(--dark);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(229,9,20,0.12), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 110%, rgba(229,9,20,0.07), transparent);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* ── CARD ────────────────────────────────────────────── */
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 48px 40px 40px;
+  animation: fadeUp 0.5s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── LOGO / TITRE ────────────────────────────────────── */
+
+.login-container::before {
+  content: 'IMDb & co';
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: var(--red);
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.login-container h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.9rem;
+  letter-spacing: 2px;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+/* ── FORM ────────────────────────────────────────────── */
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 18px;
+}
+
+.input-group label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.input-group input {
+  padding: 13px 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.input-group input::placeholder {
+  color: #555;
+}
+
+.input-group input:focus {
+  border-color: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.08);
+}
+
+/* ── BOUTON ──────────────────────────────────────────── */
+
+.btn-submit {
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn-submit:hover  { background: var(--red-dark); }
+.btn-submit:active { transform: scale(0.98); }
+
+/* ── FOOTER ──────────────────────────────────────────── */
+
+.footer-text {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.footer-text a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+  padding-bottom: 1px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.footer-text a:hover {
+  color: var(--red);
+  border-color: var(--red);
+}
+
+/* ── MESSAGE ERREUR ──────────────────────────────────── */
+
+/* remplace le style inline du PHP */
+p[style*="color:red"] {
+  all: unset;
+  display: block;
+  margin-top: 18px;
+  padding: 11px 14px;
+  background: rgba(229, 9, 20, 0.1);
+  border: 1px solid rgba(229, 9, 20, 0.35);
+  border-radius: var(--radius);
+  color: #ff6b6b;
+  font-size: 13px;
+  text-align: center;
+}
