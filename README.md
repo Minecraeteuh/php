@@ -30,7 +30,7 @@ USE utilisateurs;
 ```
 5. Importer le fichier `database.sql` :
 ```bash
-mysql -u root -p utilisateurs < database.sql
+mysql -u root -p utilisateurs < base de donnée.sql // ce dossier se trouve dans le sous dossier ('sql') du projet sinon vous pouvez copier coller le contenant du fichier sql et le mysql en ligne de code
 ```
 6. Ouvrir `configphp.php` et vérifier les paramètres de connexion (voir ci-dessous)
 7. Accéder au site : [http://localhost/nom_du_dossier/index.php]
