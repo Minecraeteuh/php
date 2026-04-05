@@ -1,11 +1,7 @@
 <?php
 session_start();
+require_once 'configphp.php';
 
-// 1. Paramètres de connexion
-$servername = "localhost";
-$username = "root";
-$password = "kanken"; // Assure-toi que ce mot de passe est le bon dans Wamp
-$dbname = "utilisateurs";
 
 try {
     $bdd = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
@@ -16,9 +12,6 @@ try {
 
 $resultats = [];
 $recherche_faite = false;
-
-// 2. Logique de recherche
-// ... haut du fichier inchangé ...
 
 if (isset($_GET['query']) && !empty(trim($_GET['query']))) {
     $recherche_faite = true;
@@ -57,9 +50,9 @@ if (isset($_GET['query']) && !empty(trim($_GET['query']))) {
     <h1>IMDb & co</h1>
     <nav>
         <ul>
-            <li><a href="index.php">Accueil</a></li>
-            <li><a href="Categorie.php">Catégories</a></li>
-            <li><a href="panier.php">Mon Panier</a></li>
+            <li><img src="assets/logo/home.svg" alt="home" class="home-icon-svg"><a href="index.php">Accueil</a></li>
+            <li><img src="assets/logo/categorie.svg" alt="categorie" class="categorie-icon-svg"><a href="Categorie.php">Catégories</a></li>
+            <li><img src="assets/logo/cart.svg" alt="Panier" class="cart-icon-svg"><a href="panier.php">Mon Panier</a></li>
         </ul>
     </nav>
 </header>
@@ -86,7 +79,7 @@ if (isset($_GET['query']) && !empty(trim($_GET['query']))) {
             <?php if (!empty($resultats)): ?>
                 <?php foreach ($resultats as $film): ?>
                     <div class="poster-container">
-                        <img src="assets/img/<?php echo $film['image']; ?>" alt="<?php echo $film['titre']; ?>>
+                        <img src="assets/img/<?php echo $film['image']; ?>" alt="<?php echo htmlspecialchars($film['titre']); ?>">
                         <h3><?php echo htmlspecialchars($film['titre']); ?></h3>
                         <p><strong>Réalisateur :</strong> <?php echo htmlspecialchars($film['nom_realisateur'] ?? 'Inconnu'); ?></p>
                         <p><strong>Année :</strong> <?php echo htmlspecialchars($film['Sortie']); ?></p>

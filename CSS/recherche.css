@@ -27,8 +27,6 @@ body {
   overflow-x: hidden;
 }
 
-/* ── HEADER ─────────────────────────────────────────── */
-
 header {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -55,7 +53,20 @@ nav ul {
   list-style: none;
 }
 
-nav ul a {
+nav ul li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+nav ul li img {
+  width: 18px;
+  height: 18px;
+  display: block;
+  filter: invert(1);
+}
+
+nav ul li a {
   color: var(--text-muted);
   text-decoration: none;
   font-size: 13px;
@@ -64,9 +75,9 @@ nav ul a {
   transition: color 0.2s;
 }
 
-nav ul a:hover { color: #fff; }
-
-/* ── SEARCH ZONE ─────────────────────────────────────── */
+nav ul li a:hover {
+  color: #fff;
+}
 
 .search-container {
   margin-top: 68px;
@@ -95,79 +106,36 @@ nav ul a:hover { color: #fff; }
   min-width: 220px;
   padding: 13px 18px;
   background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  border-radius: var(--radius) !important;
   color: #fff;
   font-family: 'DM Sans', sans-serif;
   font-size: 15px;
   outline: none;
   transition: border-color 0.2s, background 0.2s;
-  /* override inline styles from PHP */
-  width: auto !important;
-  border-radius: var(--radius) !important;
-  border: 1px solid rgba(255,255,255,0.12) !important;
-}
-
-.search-container input[type="text"]::placeholder {
-  color: var(--text-muted);
-}
-
-.search-container input[type="text"]:focus {
-  border-color: rgba(255,255,255,0.35) !important;
-  background: rgba(255,255,255,0.1);
 }
 
 .search-container select {
   padding: 13px 16px;
   background: rgba(255,255,255,0.07);
   border: 1px solid rgba(255,255,255,0.12);
-  border-radius: var(--radius) !important;
+  border-radius: var(--radius);
   color: var(--text);
   font-family: 'DM Sans', sans-serif;
   font-size: 14px;
   cursor: pointer;
   outline: none;
-  appearance: none;
-  -webkit-appearance: none;
-  padding-right: 36px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  transition: border-color 0.2s;
-}
-
-.search-container select:focus {
-  border-color: rgba(255,255,255,0.35);
-}
-
-.search-container select option {
-  background: var(--dark-3);
-  color: var(--text);
 }
 
 .search-container button[type="submit"] {
-  padding: 13px 28px !important;
-  background: var(--red) !important;
-  color: #fff !important;
-  border: none !important;
-  border-radius: var(--radius) !important;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
+  padding: 13px 28px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
   font-weight: 600;
-  letter-spacing: 0.5px;
   cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
 }
-
-.search-container button[type="submit"]:hover {
-  background: var(--red-dark) !important;
-}
-
-.search-container button[type="submit"]:active {
-  transform: scale(0.97);
-}
-
-/* ── RESULTS ─────────────────────────────────────────── */
 
 main {
   padding: 40px 4% 60px;
@@ -179,104 +147,49 @@ main {
   gap: 20px;
 }
 
-@media (max-width: 600px) {
-  .movie-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-}
-
-/* ── POSTER CARD ─────────────────────────────────────── */
-
 .poster-container {
   background: var(--surface);
   border-radius: 6px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s cubic-bezier(.25,.46,.45,.94), box-shadow 0.3s;
-  border: 1px solid rgba(255,255,255,0.04);
+  transition: transform 0.3s;
 }
 
 .poster-container:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.7);
-  border-color: rgba(255,255,255,0.1);
+  transform: translateY(-5px);
 }
 
 .poster-container img {
   width: 100%;
   aspect-ratio: 2/3;
   object-fit: cover;
-  display: block;
-  background: var(--dark-3);
-  transition: filter 0.3s;
-}
-
-.poster-container:hover img {
-  filter: brightness(0.8);
 }
 
 .poster-container h3 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.05rem;
-  letter-spacing: 1px;
-  color: #fff;
-  padding: 12px 12px 4px;
-  line-height: 1.2;
+  padding: 10px;
 }
 
 .poster-container p {
-  font-size: 12px;
+  padding: 0 10px;
+  font-size: 0.9rem;
   color: var(--text-muted);
-  padding: 2px 12px;
-  line-height: 1.5;
-}
-
-.poster-container p strong {
-  color: rgba(229,229,229,0.7);
-  font-weight: 500;
-}
-
-.poster-container p em {
-  font-style: normal;
-  color: #777;
-  font-size: 11.5px;
 }
 
 .price {
-  font-size: 14px !important;
-  font-weight: 600;
   color: var(--red) !important;
-  padding: 8px 12px 4px !important;
+  font-weight: bold;
+  padding: 10px !important;
 }
 
 .btn-details {
   display: block;
-  margin: 10px 12px 14px;
-  padding: 9px 0;
+  margin: 10px;
+  padding: 10px;
   text-align: center;
-  background: rgba(229, 9, 20, 0.12);
-  color: var(--red);
-  text-decoration: none;
-  border: 1px solid rgba(229, 9, 20, 0.35);
-  border-radius: var(--radius);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.4px;
-  transition: background 0.2s, color 0.2s;
-  margin-top: auto;
-}
-
-.btn-details:hover {
   background: var(--red);
-  color: #fff;
-  border-color: var(--red);
-}
-
-/* ── EMPTY STATE ─────────────────────────────────────── */
-
-.movie-grid > p {
-  grid-column: 1 / -1;
-  text-align: center;
-  color: var(--text-muted) !important;
-  font-size: 15px;
-  padding: 60px 0;
+  color: white;
+  text-decoration: none;
+  border-radius: var(--radius);
 }

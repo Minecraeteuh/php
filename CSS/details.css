@@ -1,99 +1,190 @@
+
+
+:root {
+  --red: #E50914;
+  --red-dark: #B20710;
+  --dark: #141414;
+  --dark-2: #1a1a1a;
+  --dark-3: #222;
+  --surface: #1f1f1f;
+  --text: #e5e5e5;
+  --text-muted: #999;
+  --radius: 4px;
+}
+
 .details-container {
-    margin-top: 100px;
-    padding: 0 5%;
+    padding-top: 100px; /* Espace pour le header fixe */
+    padding-bottom: 50px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 80vh;
+    min-height: 100vh;
+    background-color: var(--dark); /* Utilisation de la variable globale */
 }
 
 .details-content {
     display: flex;
-    gap: 50px;
-    background: #181818;
+    gap: 40px;
+    background: var(--dark-2); /* Fond légèrement plus clair que le body */
     padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-    max-width: 1000px;
-    width: 100%;
+    border-radius: var(--radius);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+    max-width: 1100px;
+    width: 90%;
+    margin-top: 20px;
 }
 
 .details-image img {
-    width: 300px;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    width: 320px;
+    height: auto;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    object-fit: cover;
+    aspect-ratio: 2/3;
 }
 
 .details-info {
     flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .movie-title {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    color: #e50914;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    letter-spacing: 2px;
+    color: #fff;
+    margin-bottom: 15px;
+    line-height: 1;
 }
 
 .meta-info {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     display: flex;
+    align-items: center;
     gap: 20px;
-    font-weight: bold;
+    font-size: 1.1rem;
+    font-weight: 500;
 }
 
 .price-tag {
-    color: #46d369;
+    color: #46d369; /* Vert pour le prix, comme sur Netflix */
+    font-weight: 800;
+}
+
+.year {
+    color: var(--text-muted);
 }
 
 .description {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #d2d2d2;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+.credits {
+    border-top: 1px solid var(--dark-3);
+    padding-top: 20px;
     margin-bottom: 30px;
 }
 
 .credits p {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.credits strong {
+    color: #fff;
 }
 
 .director-link {
-    color: #e50914;
+    color: var(--red);
     text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: 0.3s;
+    font-weight: 600;
+    transition: color 0.2s;
 }
 
 .director-link:hover {
-    border-bottom: 1px solid #e50914;
+    color: var(--red-dark);
 }
 
 .btn-buy {
-    display: inline-block;
-    background: #e50914;
+    align-self: flex-start;
+    background-color: var(--red);
     color: white;
-    padding: 15px 30px;
-    border-radius: 5px;
+    padding: 15px 35px;
+    border-radius: var(--radius);
     text-decoration: none;
-    font-weight: bold;
-    font-size: 1.2rem;
-    transition: transform 0.2s;
-    margin-top: 20px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: transform 0.2s, background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .btn-buy:hover {
+    background-color: var(--red-dark);
     transform: scale(1.05);
-    background: #f40612;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* Adaptation pour les tablettes et mobiles */
+@media (max-width: 850px) {
     .details-content {
         flex-direction: column;
+        align-items: center;
         text-align: center;
     }
+    
     .details-image img {
-        width: 100%;
-        max-width: 250px;
+        width: 250px;
     }
+    
+    .btn-buy {
+        align-self: center;
+    }
+}
+
+/* ── ALIGNEMENT HEADER DÉTAILS ── */
+
+.netflix-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4%;
+    height: 68px;
+    background: rgba(20, 20, 20, 0.97);
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.main-nav a {
+    display: flex;         /* On transforme le lien en boîte flexible */
+    align-items: center;   /* On centre l'icône et le texte verticalement */
+    gap: 8px;              /* Espace entre l'image et le texte */
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.main-nav a:hover {
+    color: #fff;
+}
+
+.nav-icon {
+    width: 20px;
+    height: 20px;
+    display: block;        /* Enlève l'espace de texte sous l'image */
+    filter: invert(1);     /* Rend les icônes blanches */
 }

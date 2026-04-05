@@ -1,0 +1,180 @@
+/* CSS/panier.css */
+
+/* ── VARIABLES ET BASES (Identiques à categorie.css) ── */
+:root {
+  --red: #E50914;
+  --red-dark: #B20710;
+  --dark: #141414;
+  --dark-2: #1a1a1a;
+  --surface: #1f1f1f;
+  --text: #e5e5e5;
+  --text-muted: #999;
+  --radius: 4px;
+}
+
+/* ── HEADER : ALIGNEMENT LOGOS + TEXTE ──────────────── */
+
+.netflix-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4%;
+  height: 68px;
+  background: rgba(20, 20, 20, 0.97);
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+/* LA SOLUTION POUR L'ALIGNEMENT VERTICAL */
+.main-nav a {
+  display: flex;
+  align-items: center; /* Centre verticalement l'image et le texte */
+  gap: 10px;           /* Espace entre l'icône et le mot */
+  text-decoration: none;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.main-nav a:hover {
+  color: var(--text-muted);
+}
+
+.main-nav img {
+  width: 20px;
+  height: 20px;
+  display: block;      /* Supprime l'espace sous l'image */
+  filter: invert(1);   /* Rend les icônes blanches si elles sont noires */
+}
+
+/* ── CONTENU DU PANIER ──────────────────────────────── */
+
+.cart-container {
+  padding: 100px 4% 50px;
+  min-height: 100vh;
+}
+
+.row-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+  color: #fff;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.cart-table th {
+  text-align: left;
+  padding: 1rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cart-table tr {
+  background: var(--surface);
+}
+
+.cart-table td {
+  padding: 1rem;
+  vertical-align: middle;
+}
+
+/* Coins arrondis pour les lignes du tableau */
+.cart-table tr td:first-child { border-radius: 6px 0 0 6px; }
+.cart-table tr td:last-child { border-radius: 0 6px 6px 0; }
+
+.img-cart {
+  width: 60px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* ── ACTIONS ET TOTAL ───────────────────────────────── */
+
+.btn-delete {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.3s;
+}
+
+.btn-delete:hover {
+  color: var(--red);
+}
+
+.total-section {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--surface);
+  border-radius: 6px;
+  text-align: right;
+}
+
+.total-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  color: #fff;
+  margin-left: 1rem;
+}
+
+.cart-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn-clear, .btn-checkout, .btn-red {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.8rem 2rem;
+  border-radius: 4px;
+  transition: 0.3s;
+  display: inline-block;
+}
+
+.btn-clear {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--text-muted);
+}
+
+.btn-clear:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.btn-checkout, .btn-red {
+  background: var(--red);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-checkout:hover, .btn-red:hover {
+  background: var(--red-dark);
+  transform: scale(1.02);
+}
+
+.empty-msg {
+  text-align: center;
+  padding: 5rem 0;
+  color: var(--text-muted);
+}

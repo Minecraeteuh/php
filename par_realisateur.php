@@ -1,11 +1,6 @@
 <?php
 session_start();
-
-// Connexion BDD (Identifiants inchangés)
-$servername = "localhost";
-$username = "root";
-$password = "kanken";
-$dbname = "utilisateurs";
+require_once 'configphp.php';
 
 try {
     $bdd = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);

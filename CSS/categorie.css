@@ -63,7 +63,20 @@ nav ul a {
 
 nav ul a:hover { color: #fff; }
 
-/* ── MAIN ────────────────────────────────────────────── */
+.user-nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.user-nav {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    padding: 0;
+}
+
 
 .container {
   margin-top: 68px;

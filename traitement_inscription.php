@@ -1,9 +1,6 @@
-//* traitement_inscription.php */
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "kanken";
-$dbname = "utilisateurs";
+session_start();
+require_once 'configphp.php';
 
 try{
     $bdd = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);

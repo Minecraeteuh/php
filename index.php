@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'configphp.php';
 
 $user_pseudo = "Visiteur";
@@ -9,10 +10,10 @@ if (isset($_COOKIE['email']) && isset($_COOKIE['token'])) {
     if ($user) { $user_pseudo = htmlspecialchars($user['pseudo']); }
 }
 
-$populaires = $bdd->query("SELECT * FROM films ORDER BY RAND() LIMIT 6")->fetchAll(PDO::FETCH_ASSOC);
-$nouveautes = $bdd->query("SELECT * FROM films ORDER BY Sortie DESC LIMIT 6")->fetchAll(PDO::FETCH_ASSOC);
+$nouveautes = $bdd->query("SELECT * FROM films ORDER BY RAND() LIMIT 6")->fetchAll(PDO::FETCH_ASSOC);
+$populaires = $bdd->query("SELECT * FROM films ORDER BY Sortie DESC LIMIT 6")->fetchAll(PDO::FETCH_ASSOC);
 
-$hero = $populaires[0] ?? null;
+$hero = $nouveautes[0] ?? null;
 ?>
 
 <!DOCTYPE html>
@@ -33,9 +34,10 @@ $hero = $populaires[0] ?? null;
             <a href="Categorie.php">Catégories</a>
         </nav>
         <div class="user-nav">
-            <a href="panier.php" class="icon">🛒</a>
+            <a href="panier.php" class="cart-link"><img src="assets/logo/cart.svg" alt="Panier" class="cart-icon-svg"></a>
             <?php if($user_pseudo != "Visiteur"): ?>
-                <span class="pseudo">👤 <?php echo $user_pseudo; ?></span>
+                <span class="pseudo"><img src="assets/logo/account.svg" alt="Profil" class="profile-icon-svg">
+                <?php echo $user_pseudo; ?></span>
                 <a href="deconnexion.php" class="btn-logout">Quitter</a>
             <?php else: ?>
                 <a href="connexion.php" class="btn-red">S'identifier</a>
@@ -49,8 +51,8 @@ $hero = $populaires[0] ?? null;
             <h1 class="hero-title"><?php echo htmlspecialchars($hero['titre']); ?></h1>
             <p class="hero-description"><?php echo htmlspecialchars(substr($hero['description'], 0, 150)); ?>...</p>
             <div class="hero-buttons">
-                <a href="details.php?id=<?php echo $hero['id']; ?>" class="btn-white">Détails</a>
-                <a href="ajouter_panier.php?id=<?php echo $hero['id']; ?>" class="btn-gray">🛒 + Panier</a>
+                <a href="film_details.php?id=<?php echo $hero['id']; ?>" class="btn-white">Détails</a>
+                <a href="panier.php?add=<?php echo $hero['id']; ?>" class="btn-gray">+ Panier</a>
             </div>
         </div>
     </section>
@@ -66,8 +68,7 @@ $hero = $populaires[0] ?? null;
                             <img src="assets/img/<?php echo $f['image']; ?>" alt="<?php echo $f['titre']; ?>" class="poster">
                             <div class="poster-info">
                                 <span><?php echo $f['prix']; ?>€</span>
-                                <button class="btn-gray">🛒 + Panier</button>
-                                <a href="film_details.php?id=<?php echo $f['id']; ?>" class="btn-details">Détails</a>
+                                <button class="btn-gray">Détails</button>
                             </div>
                         </a>
                     </div>
@@ -76,7 +77,7 @@ $hero = $populaires[0] ?? null;
         </section>
 
         <section class="row">
-            <h2 class="row-title">Nouveautés</h2>
+            <h2 class="row-title">Les plus aimés</h2>
             <div class="row-posters">
                 <?php foreach($nouveautes as $f): ?>
                     <div class="poster-container">
@@ -84,8 +85,7 @@ $hero = $populaires[0] ?? null;
                             <img src="assets/img/<?php echo $f['image']; ?>" alt="<?php echo $f['titre']; ?>" class="poster">
                             <div class="poster-info">
                                 <span><?php echo $f['prix']; ?>€</span>
-                                <button class="btn-gray">🛒 + Panier</button>
-                                <a href="film_details.php?id=<?php echo $f['id']; ?>" class="btn-details">Détails</a>
+                                <button class="btn-gray">Détails</button>
                             </div>
                         </a>
                     </div>

@@ -1,36 +1,43 @@
 <?php
 session_start();
-
-$servername = "localhost";
-$username = "root";
-$password = "kanken";
-$dbname = "utilisateurs";
+require_once 'configphp.php';
 
 try {
     $bdd = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(PDOException $e) {
-    die("Erreur : " . $e->getMessage());
+    die("Erreur de connexion : " . $e->getMessage());
 }
 
-if (!isset($_GET['id']) || empty($_GET['id'])) {
+$film = null;
+$acteurs = [];
+
+if (isset($_GET['id']) && !empty($_GET['id'])) {
+    $id_film = intval($_GET['id']);
+
+    $query = $bdd->prepare("
+        SELECT films.*, realisateurs.name AS nom_realisateur 
+        FROM films 
+        LEFT JOIN realisateurs ON films.realisateur_id = realisateurs.id 
+        WHERE films.id = :id
+    ");
+    $query->execute(['id' => $id_film]);
+    $film = $query->fetch(PDO::FETCH_ASSOC);
+
+    if ($film) {
+        $queryActeurs = $bdd->prepare("
+            SELECT acteurs.name 
+            FROM acteurs 
+            JOIN liaisonActeurs ON acteurs.id = liaisonActeurs.acteur_id 
+            WHERE liaisonActeurs.movie_id = :id
+        ");
+        $queryActeurs->execute(['id' => $id_film]);
+        $acteurs = $queryActeurs->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
+if (!$film) {
     header("Location: index.php");
     exit();
-}
-
-$id_film = $_GET['id'];
-
-$query = $bdd->prepare("
-    SELECT films.*, realisateurs.name AS nom_realisateur 
-    FROM films 
-    LEFT JOIN realisateurs ON films.realisateur_id = realisateurs.id 
-    WHERE films.id = :id
-");
-$query->execute(['id' => $id_film]);
-$film = $query->fetch(PDO::FETCH_ASSOC);
-
-if (!$film) {
-    die("Film non trouvé.");
 }
 ?>
 
@@ -38,19 +45,18 @@ if (!$film) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($film['titre']); ?> - IMDb & co</title>
     <link rel="stylesheet" href="CSS/index.css">
     <link rel="stylesheet" href="CSS/details.css">
 </head>
-<body>
+<body class="netflix-body">
 
-    <header class="netflix-nav">
+    <header class="netflix-header">
         <div class="logo">IMDb & co</div>
-        <nav class="nav-links">
-            <a href="index.php">Accueil</a>
-            <a href="recherche.php">Recherche</a>
-            <a href="Categorie.php">Catégories</a>
+        <nav class="main-nav">
+            <a href="index.php"><img src="assets/logo/home.svg" alt="home" class="nav-icon">Accueil</a>
+            <a href="recherche.php"><img src="assets/logo/search.svg" alt="search" class="nav-icon">Recherche</a>
+            <a href="panier.php"><img src="assets/logo/cart.svg" alt="Panier" class="nav-icon"> Panier</a>
         </nav>
     </header>
 
@@ -65,12 +71,10 @@ if (!$film) {
                 
                 <div class="meta-info">
                     <span class="year"><?php echo htmlspecialchars($film['Sortie']); ?></span>
-                    <span class="price-tag"><?php echo htmlspecialchars($film['prix']); ?>€</span>
+                    <span class="price-tag"><?php echo number_format($film['prix'], 2); ?>€</span>
                 </div>
 
-                <p class="description">
-                    <?php echo nl2br(htmlspecialchars($film['description'])); ?>
-                </p>
+                <p class="description"><?php echo nl2br(htmlspecialchars($film['description'])); ?></p>
 
                 <div class="credits">
                     <p><strong>Réalisateur :</strong> 
@@ -78,17 +82,25 @@ if (!$film) {
                             <?php echo htmlspecialchars($film['nom_realisateur'] ?? 'Inconnu'); ?>
                         </a>
                     </p>
-                    <p><strong>Acteurs :</strong> <?php echo htmlspecialchars($film['acteurs'] ?? 'Non renseignés'); ?></p>
+                    <p><strong>Acteurs :</strong> 
+                        <?php 
+                        if (!empty($acteurs)) {
+                            $noms = array_column($acteurs, 'name');
+                            echo htmlspecialchars(implode(', ', $noms));
+                        } else {
+                            echo "Non renseignés";
+                        }
+                        ?>
+                    </p>
                 </div>
 
                 <div class="actions">
                     <a href="panier.php?add=<?php echo $film['id']; ?>" class="btn-buy">
-                        🛒 Ajouter au panier - <?php echo $film['prix']; ?>€
+                        🛒 Ajouter au panier - <?php echo number_format($film['prix'], 2); ?>€
                     </a>
                 </div>
             </div>
         </div>
     </main>
-
 </body>
 </html>

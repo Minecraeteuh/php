@@ -1,9 +1,6 @@
 <?php
 session_start();
-$servername = "localhost";
-$username = "root";
-$password = "kanken";
-$dbname = "utilisateurs";
+require_once 'configphp.php';
 
 try {
     $bdd = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
@@ -24,11 +21,11 @@ try {
     <header>
         <h1>IMDb & co</h1>
         <nav>
-            <ul>
-                <li><a href="index.php">Accueil</a></li>
-                <li><a href="recherche.php">Rechercher</a></li>
-                <li><a href="panier.php">Panier</a></li>
-            </ul>
+        <ul class="user-nav">
+            <li><a href="index.php"><img src="assets/logo/home.svg" alt="home" class="home-icon-svg">Accueil</a></li>
+            <li><a href="recherche.php"><img src="assets/logo/search.svg" alt="search" class="search-icon-svg">Rechercher</a></li>
+            <li><a href="panier.php"><img src="assets/logo/cart.svg" alt="Panier" class="cart-icon-svg">Panier</a></li>
+        </ul> 
         </nav>
     </header>
 

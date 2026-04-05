@@ -2,8 +2,8 @@
 
 $servername = "localhost";
 $username = "root";
-$password = "kanken"; // mot de passe de votre base de données, assurez-vous qu'il est correct
-$dbname = "utilisateurs";
+$password = "root"; // mot de passe de votre base de données, assurez-vous qu'il est correct
+$dbname = "movie";
 
 
 try {

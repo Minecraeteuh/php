@@ -29,8 +29,6 @@ body.netflix-body {
   overflow-x: hidden;
 }
 
-/* ── HEADER ─────────────────────────────────────────── */
-
 .netflix-header {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -76,12 +74,17 @@ body.netflix-body {
 .user-nav {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 15px;
+}
+
+.profile-icon-svg, 
+.cart-icon-svg, 
+.pseudo {
+  vertical-align: middle;
 }
 
 .user-nav .icon {
   font-size: 18px;
-  text-decoration: none;
   opacity: 0.85;
   transition: opacity 0.2s;
 }
@@ -91,7 +94,9 @@ body.netflix-body {
   font-size: 13px;
   color: var(--text-muted);
   font-weight: 500;
+
 }
+
 
 .btn-logout {
   font-size: 12px;
@@ -118,8 +123,6 @@ body.netflix-body {
   transition: background 0.2s;
 }
 .btn-red:hover { background: var(--red-dark); }
-
-/* ── HERO ────────────────────────────────────────────── */
 
 .hero-section {
   position: relative;
@@ -251,8 +254,6 @@ body.netflix-body {
 @media (max-width: 768px)  { .row-posters { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 480px)  { .row-posters { grid-template-columns: repeat(2, 1fr); } }
 
-/* ── POSTER CARD ─────────────────────────────────────── */
-
 .poster-container {
   position: relative;
   border-radius: 4px;
@@ -309,9 +310,6 @@ body.netflix-body {
   letter-spacing: 0.3px;
 }
 
-/* ── SCROLLED HEADER ─────────────────────────────────── */
-
-/* JS hook — add via tiny inline script */
 .netflix-header.bg-solid {
   background: rgba(20,20,20,0.97) !important;
 }
