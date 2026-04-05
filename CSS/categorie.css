@@ -24,7 +24,6 @@ body {
   min-height: 100vh;
 }
 
-/* ── HEADER ─────────────────────────────────────────── */
 
 header {
   position: fixed;
@@ -97,7 +96,6 @@ nav ul a:hover { color: #fff; }
   margin-bottom: 48px;
 }
 
-/* ── CATEGORY CARDS ──────────────────────────────────── */
 
 .categories {
   display: grid;

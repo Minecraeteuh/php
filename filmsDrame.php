@@ -2,12 +2,6 @@
 session_start();
 require_once 'configphp.php';
 
-try {
-    $bdd = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-    die("Erreur : " . $e->getMessage());
-}
 
 $req = $bdd->prepare("
     SELECT films.*, realisateurs.name AS nom_realisateur
@@ -45,7 +39,7 @@ $films = $req->fetchAll(PDO::FETCH_ASSOC);
     <h2>Nos films de drame</h2>
     <p class="subtitle">Découvrez notre sélection de films de drame émouvants.</p>
 
-    <div class="movie-grid">
+    <div class="film-grid">
         <?php if (empty($films)): ?>
             <p class="empty">Aucun film de drame trouvé.</p>
         <?php else: ?>
@@ -57,9 +51,9 @@ $films = $req->fetchAll(PDO::FETCH_ASSOC);
                         <div class="overlay">
                             <h3><?php echo htmlspecialchars($film['titre']); ?></h3>
                             <p><?php echo htmlspecialchars($film['nom_realisateur'] ?? 'Inconnu'); ?></p>
-                            <span class="price"><?php echo number_format($film['prix'], 2); ?> €</span>
+                            <span class="prix"><?php echo number_format($film['prix'], 2); ?> €</span>
                             <div class="card-buttons">
-                                <a href="ajouter_panier.php?id=<?php echo $film['id']; ?>" class="btn-cart">🛒 Panier</a>
+                                <a href="ajouter_panier.php?id=<?php echo $film['id']; ?>" class="btn-acheter">🛒 Panier</a>
                                 <a href="film_details.php?id=<?php echo $film['id']; ?>" class="btn-details">Détails</a>
                             </div>
                         </div>

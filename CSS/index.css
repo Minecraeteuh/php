@@ -225,7 +225,6 @@ body.netflix-body {
 }
 .btn-gray:hover { background: rgba(109,109,110,0.9); }
 
-/* ── ROWS ────────────────────────────────────────────── */
 
 .content-rows {
   padding: 0 4% 60px;
@@ -310,27 +309,26 @@ body.netflix-body {
   letter-spacing: 0.3px;
 }
 
-.netflix-header.bg-solid {
+.header.bg-solid {
   background: rgba(20,20,20,0.97) !important;
 }
 
-/* Style pour le lien du pseudo */
 .pseudo-link {
     display: flex;
     align-items: center;
     gap: 8px;
-    text-decoration: none; /* Enlève le soulignement */
-    color: var(--text);   /* Garde la couleur blanche du texte */
+    text-decoration: none; 
+    color: var(--text);   
     font-weight: 500;
     font-size: 0.9rem;
     transition: color 0.2s;
 }
 
 .pseudo-link:hover {
-    color: var(--red);    /* Le nom devient rouge quand on passe dessus */
+    color: var(--red);    
 }
 
-.profile-icon-svg {
+.profile-icon {
     width: 20px;
     height: 20px;
     display: block;

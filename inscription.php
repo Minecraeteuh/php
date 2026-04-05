@@ -9,7 +9,7 @@
 <body>
     <div class="register-container">
         <h1>Créer un compte</h1>
-        <p class="subtitle">Rejoignez la communauté IMDb & co</p>
+        <p class="subtitle">Créer un compte IMDb & co</p>
         
         <form action="traitement_inscription.php" method="post">
             <div class="input-group">

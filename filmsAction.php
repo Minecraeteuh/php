@@ -2,14 +2,8 @@
 session_start();
 require_once 'configphp.php';
 
-try {
-    $bdd = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-    die("Erreur : " . $e->getMessage());
-}
 
-// Jointure correcte : films + liaisongenres pour récupérer les vrais champs
+
 $req = $bdd->prepare("
     SELECT films.*, realisateurs.name AS nom_realisateur
     FROM films
@@ -46,7 +40,7 @@ $films = $req->fetchAll(PDO::FETCH_ASSOC);
     <h2>Nos films d'action</h2>
     <p class="subtitle">Découvrez notre sélection de films d'action palpitants.</p>
 
-    <div class="movie-grid">
+    <div class="film-grid">
         <?php if (empty($films)): ?>
             <p class="empty">Aucun film d'action trouvé.</p>
         <?php else: ?>
@@ -60,7 +54,7 @@ $films = $req->fetchAll(PDO::FETCH_ASSOC);
                             <p><?php echo htmlspecialchars($film['nom_realisateur'] ?? 'Inconnu'); ?></p>
                             <span class="price"><?php echo number_format($film['prix'], 2); ?> €</span>
                             <div class="card-buttons">
-                                <a href="ajouter_panier.php?id=<?php echo $film['id']; ?>" class="btn-cart">🛒 Panier</a>
+                                <a href="ajouter_panier.php?id=<?php echo $film['id']; ?>" class="btn-acheter">🛒 Panier</a>
                                 <a href="film_details.php?id=<?php echo $film['id']; ?>" class="btn-details">Détails</a>
                             </div>
                         </div>

@@ -23,7 +23,6 @@ body {
   min-height: 100vh;
 }
 
-/* ── HEADER ─────────────────────────────────────────── */
 
 header {
   position: fixed;
@@ -62,7 +61,6 @@ nav ul a {
 
 nav ul a:hover { color: #fff; }
 
-/* ── MAIN ────────────────────────────────────────────── */
 
 .container {
   margin-top: 68px;
@@ -90,19 +88,17 @@ nav ul a:hover { color: #fff; }
   text-align: center;
 }
 
-/* ── GRID ────────────────────────────────────────────── */
 
-.movie-grid {
+.film-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 12px;
 }
 
 @media (max-width: 600px) {
-  .movie-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .film-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
 }
 
-/* ── POSTER CARD ─────────────────────────────────────── */
 
 .poster-container {
   position: relative;
@@ -137,7 +133,6 @@ nav ul a:hover { color: #fff; }
   filter: brightness(0.4);
 }
 
-/* ── OVERLAY ─────────────────────────────────────────── */
 
 .overlay {
   position: absolute;
@@ -172,7 +167,7 @@ nav ul a:hover { color: #fff; }
   margin-bottom: 6px;
 }
 
-.price {
+.prix {
   font-size: 13px;
   font-weight: 600;
   color: var(--red);
@@ -185,7 +180,7 @@ nav ul a:hover { color: #fff; }
   gap: 6px;
 }
 
-.btn-cart,
+.btn-acheter,
 .btn-details {
   flex: 1;
   text-align: center;
@@ -198,12 +193,12 @@ nav ul a:hover { color: #fff; }
   transition: background 0.2s, color 0.2s;
 }
 
-.btn-cart {
+.btn-acheter {
   background: rgba(255,255,255,0.12);
   color: #fff;
   border: 1px solid rgba(255,255,255,0.2);
 }
-.btn-cart:hover {
+.btn-acheter:hover {
   background: rgba(255,255,255,0.22);
 }
 

@@ -33,13 +33,13 @@ $hero = $nouveautes[0] ?? null;
             <a href="recherche.php">Recherche</a>
             <a href="Categorie.php">Catégories</a>
         </nav>
-        <div class="user-nav">
+        <div class="utilisateur-nav">
         <a href="panier.php" class="cart-link">
-            <img src="assets/logo/cart.svg" alt="Panier" class="cart-icon-svg">
+            <img src="assets/logo/cart.svg" alt="Panier" class="cart-icon">
         </a>
             <?php if($user_pseudo != "Visiteur"): ?>
             <a href="profil.php" class="pseudo-link">
-            <img src="assets/logo/account.svg" alt="Profil" class="profile-icon-svg">
+            <img src="assets/logo/account.svg" alt="Profil" class="profile-icon">
             <?php echo $user_pseudo; ?>
         </a>
         <a href="deconnexion.php" class="btn-logout">Quitter</a>

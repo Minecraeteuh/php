@@ -1,4 +1,3 @@
-/* ── ALIGNEMENT DU HEADER ───────────────────────────── */
 
 .netflix-header {
     display: flex;
@@ -18,7 +17,6 @@
     gap: 25px;
 }
 
-/* LA SOLUTION : On force l'alignement vertical sur tous les liens du header */
 .main-nav a, .pseudo-link, .cart-link {
     display: flex;
     align-items: center;
@@ -37,10 +35,9 @@
     width: 20px;
     height: 20px;
     display: block;
-    filter: invert(1); /* Rend les icônes blanches */
+    filter: invert(1); 
 }
 
-/* ── MISE EN PAGE DU PROFIL ─────────────────────────── */
 
 .profil-container {
     padding: 100px 4% 50px;

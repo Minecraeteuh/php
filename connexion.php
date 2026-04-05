@@ -23,7 +23,7 @@
                 <input type="password" id="password" name="password" placeholder="••••••••" required>
             </div>
 
-            <button type="submit" name="ok" class="btn-submit">Se connecter</button>
+            <button type="submit" name="ok" class="btn-connexion">Se connecter</button>
         </form>
         
         <p class="footer-text">Pas encore de compte ? <a href="inscription.php">Inscrivez-vous</a></p>

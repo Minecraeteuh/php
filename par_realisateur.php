@@ -2,14 +2,7 @@
 session_start();
 require_once 'configphp.php';
 
-try {
-    $bdd = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-    die("Erreur : " . $e->getMessage());
-}
 
-// 1. Récupération de l'ID du réalisateur
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     header("Location: index.php");
     exit();
@@ -17,7 +10,6 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 
 $id_realisateur = $_GET['id'];
 
-// 2. Récupérer les infos du réalisateur
 $reqRealisateur = $bdd->prepare("SELECT name FROM realisateurs WHERE id = :id");
 $reqRealisateur->execute(['id' => $id_realisateur]);
 $realisateur = $reqRealisateur->fetch();
@@ -26,7 +18,6 @@ if (!$realisateur) {
     die("Réalisateur introuvable.");
 }
 
-// 3. Récupérer tous ses films
 $reqFilms = $bdd->prepare("SELECT * FROM films WHERE realisateur_id = :id ORDER BY Sortie DESC");
 $reqFilms->execute(['id' => $id_realisateur]);
 $films = $reqFilms->fetchAll(PDO::FETCH_ASSOC);

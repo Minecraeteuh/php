@@ -1,6 +1,5 @@
-/* Variables de couleurs type "Cinéma" */
 :root {
-    --primary-color: #e50914; /* Rouge Netflix */
+    --primary-color: #e50914; 
     --bg-dark: #141414;
     --card-bg: #1f1f1f;
     --text-color: #ffffff;
@@ -23,7 +22,6 @@ body {
     padding: 20px;
 }
 
-/* Conteneur principal */
 .register-container {
     background-color: var(--card-bg);
     padding: 40px;
@@ -46,7 +44,6 @@ h1 {
     margin-bottom: 30px;
 }
 
-/* Groupes d'input */
 .input-group {
     margin-bottom: 20px;
 }
@@ -74,8 +71,7 @@ input:focus {
     background-color: #454545;
 }
 
-/* Bouton */
-.btn-submit {
+.btn-connexion {
     width: 100%;
     padding: 14px;
     background-color: var(--primary-color);
@@ -89,7 +85,7 @@ input:focus {
     transition: transform 0.2s, background 0.3s;
 }
 
-.btn-submit:hover {
+.btn-connexion:hover {
     background-color: #b2070f;
     transform: translateY(-2px);
 }
@@ -111,7 +107,6 @@ input:focus {
     text-decoration: underline;
 }
 
-/* Responsive : Tablette et Mobile */
 @media (max-width: 480px) {
     .register-container {
         padding: 25px;

@@ -2,14 +2,6 @@
 session_start();
 require_once 'configphp.php';
 
-try {
-    $bdd = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
-}
-
-
 $sql = "SELECT films.*, genres.nom AS nom_genre 
         FROM films 
         JOIN liaisonGenres ON films.id = liaisonGenres.movie_id 
@@ -18,7 +10,6 @@ $sql = "SELECT films.*, genres.nom AS nom_genre
 $query = $bdd->query($sql);
 $tous_les_films = $query->fetchAll(PDO::FETCH_ASSOC);
 
-// 3. GROUPEMENT PAR GENRE EN PHP
 $categories = [];
 foreach ($tous_les_films as $f) {
     $genre = $f['nom_genre'];
@@ -36,7 +27,8 @@ foreach ($tous_les_films as $f) {
     <title>Catalogue par Catégories - IMDb & co</title>
     <link rel="stylesheet" href="CSS/index.css">
 </head>
-<body class="netflix-body"> <header class="netflix-header">
+<body class="body"> 
+    <header class="header">
         <div class="logo">IMDb & co</div>
         <nav class="main-nav">
             <a href="index.php">Accueil</a>
