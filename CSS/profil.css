@@ -1,0 +1,107 @@
+/* ── ALIGNEMENT DU HEADER ───────────────────────────── */
+
+.netflix-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4%;
+    height: 68px;
+    background: rgba(20, 20, 20, 0.97);
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+}
+
+.main-nav, .user-nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+/* LA SOLUTION : On force l'alignement vertical sur tous les liens du header */
+.main-nav a, .pseudo-link, .cart-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.main-nav a:hover, .pseudo-link:hover {
+    color: #fff;
+}
+
+.nav-icon {
+    width: 20px;
+    height: 20px;
+    display: block;
+    filter: invert(1); /* Rend les icônes blanches */
+}
+
+/* ── MISE EN PAGE DU PROFIL ─────────────────────────── */
+
+.profil-container {
+    padding: 100px 4% 50px;
+    min-height: 100vh;
+}
+
+.row-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.profil-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.profil-card {
+    background: var(--surface);
+    padding: 30px;
+    border-radius: var(--radius);
+}
+
+.profil-card h2 {
+    color: var(--red);
+    font-family: 'Bebas Neue', sans-serif;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.input-group label {
+    display: block;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    background: var(--dark-2);
+    border: 1px solid #333;
+    color: #fff;
+    margin-bottom: 15px;
+    border-radius: var(--radius);
+}
+
+.purchase-item {
+    background: var(--surface);
+    padding: 20px;
+    margin-bottom: 15px;
+    border-left: 4px solid var(--red);
+    border-radius: var(--radius);
+}
+
+.purchase-info h3 { font-size: 1.1rem; color: #fff; }
+.purchase-info p { color: var(--text-muted); margin: 5px 0; }
+.purchase-info .price { color: #46d369; font-weight: bold; }
+
+@media (max-width: 800px) {
+    .profil-grid { grid-template-columns: 1fr; }
+}

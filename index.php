@@ -34,15 +34,19 @@ $hero = $nouveautes[0] ?? null;
             <a href="Categorie.php">Catégories</a>
         </nav>
         <div class="user-nav">
-            <a href="panier.php" class="cart-link"><img src="assets/logo/cart.svg" alt="Panier" class="cart-icon-svg"></a>
+        <a href="panier.php" class="cart-link">
+            <img src="assets/logo/cart.svg" alt="Panier" class="cart-icon-svg">
+        </a>
             <?php if($user_pseudo != "Visiteur"): ?>
-                <span class="pseudo"><img src="assets/logo/account.svg" alt="Profil" class="profile-icon-svg">
-                <?php echo $user_pseudo; ?></span>
-                <a href="deconnexion.php" class="btn-logout">Quitter</a>
-            <?php else: ?>
-                <a href="connexion.php" class="btn-red">S'identifier</a>
-            <?php endif; ?>
-        </div>
+            <a href="profil.php" class="pseudo-link">
+            <img src="assets/logo/account.svg" alt="Profil" class="profile-icon-svg">
+            <?php echo $user_pseudo; ?>
+        </a>
+        <a href="deconnexion.php" class="btn-logout">Quitter</a>
+    <?php else: ?>
+        <a href="connexion.php" class="btn-red">S'identifier</a>
+    <?php endif; ?>
+</div>
     </header>
 
     <?php if ($hero): ?>

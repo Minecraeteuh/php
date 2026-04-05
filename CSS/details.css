@@ -13,18 +13,18 @@
 }
 
 .details-container {
-    padding-top: 100px; /* Espace pour le header fixe */
+    padding-top: 100px;
     padding-bottom: 50px;
     display: flex;
     justify-content: center;
     min-height: 100vh;
-    background-color: var(--dark); /* Utilisation de la variable globale */
+    background-color: var(--dark);
 }
 
 .details-content {
     display: flex;
     gap: 40px;
-    background: var(--dark-2); /* Fond légèrement plus clair que le body */
+    background: var(--dark-2);
     padding: 40px;
     border-radius: var(--radius);
     box-shadow: 0 15px 35px rgba(0,0,0,0.7);
@@ -67,7 +67,7 @@
 }
 
 .price-tag {
-    color: #46d369; /* Vert pour le prix, comme sur Netflix */
+    color: #46d369;
     font-weight: 800;
 }
 
@@ -130,7 +130,6 @@
     transform: scale(1.05);
 }
 
-/* Adaptation pour les tablettes et mobiles */
 @media (max-width: 850px) {
     .details-content {
         flex-direction: column;
@@ -146,8 +145,6 @@
         align-self: center;
     }
 }
-
-/* ── ALIGNEMENT HEADER DÉTAILS ── */
 
 .netflix-header {
     display: flex;
@@ -168,9 +165,9 @@
 }
 
 .main-nav a {
-    display: flex;         /* On transforme le lien en boîte flexible */
-    align-items: center;   /* On centre l'icône et le texte verticalement */
-    gap: 8px;              /* Espace entre l'image et le texte */
+    display: flex;
+    align-items: center;
+    gap: 8px;
     text-decoration: none;
     color: var(--text-muted);
     font-size: 14px;
@@ -185,6 +182,6 @@
 .nav-icon {
     width: 20px;
     height: 20px;
-    display: block;        /* Enlève l'espace de texte sous l'image */
-    filter: invert(1);     /* Rend les icônes blanches */
+    display: block;
+    filter: invert(1);
 }

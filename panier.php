@@ -139,7 +139,7 @@ if (!empty($_SESSION['panier'])) {
                 <p>Montant total : <span class="total-price"><?php echo number_format($total, 2); ?> €</span></p>
                 <div class="cart-actions">
                     <a href="panier.php?clear=1" class="btn-clear">Vider le panier</a>
-                    <a href="#" class="btn-checkout">Procéder au paiement</a>
+                    <a href="valider_paiement.php" class="btn-checkout">Procéder au paiement</a>
             </div>
 </div>
         <?php endif; ?>
