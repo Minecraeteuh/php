@@ -57,6 +57,14 @@ if (!empty($_SESSION['panier'])) {
         $total += $f['prix'];
     }
 }
+$user_pseudo = "Visiteur";
+if (isset($_COOKIE['email']) && isset($_COOKIE['token'])) {
+    $reqUser = $bdd->prepare("SELECT pseudo FROM users WHERE email = :email AND token = :token");
+    $reqUser->execute(['email' => $_COOKIE['email'], 'token' => $_COOKIE['token']]);
+    $user = $reqUser->fetch();
+    if ($user) { $user_pseudo = htmlspecialchars($user['pseudo']); }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -76,6 +84,10 @@ if (!empty($_SESSION['panier'])) {
             <a href="index.php"><img src="assets/logo/home.svg" alt="home" class="home-icon-svg">Accueil</a>
             <a href="recherche.php"><img src="assets/logo/search.svg" alt="search" class="search-icon-svg">Rechercher</a>
             <a href="Categorie.php"><img src="assets/logo/categorie.svg" alt="categorie" class="categorie-icon-svg">Catégories</a>
+            <a href="profil.php" class="pseudo-link">
+            <img src="assets/logo/account.svg" alt="Profil" class="profile-icon">
+            <?php echo $user_pseudo; ?>
+        </a>
         </nav>
     </header>
 

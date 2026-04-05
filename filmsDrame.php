@@ -1,8 +1,7 @@
 <?php
 session_start();
 require_once 'configphp.php';
-
-
+ 
 $req = $bdd->prepare("
     SELECT films.*, realisateurs.name AS nom_realisateur
     FROM films
@@ -22,7 +21,7 @@ $films = $req->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="CSS/filmsDrame.css">
 </head>
 <body>
-
+ 
 <header>
     <div class="logo">IMDb & co</div>
     <nav>
@@ -34,11 +33,11 @@ $films = $req->fetchAll(PDO::FETCH_ASSOC);
         </ul>
     </nav>
 </header>
-
+ 
 <main class="container">
     <h2>Nos films de drame</h2>
     <p class="subtitle">Découvrez notre sélection de films de drame émouvants.</p>
-
+ 
     <div class="film-grid">
         <?php if (empty($films)): ?>
             <p class="empty">Aucun film de drame trouvé.</p>
@@ -53,7 +52,7 @@ $films = $req->fetchAll(PDO::FETCH_ASSOC);
                             <p><?php echo htmlspecialchars($film['nom_realisateur'] ?? 'Inconnu'); ?></p>
                             <span class="prix"><?php echo number_format($film['prix'], 2); ?> €</span>
                             <div class="card-buttons">
-                                <a href="ajouter_panier.php?id=<?php echo $film['id']; ?>" class="btn-acheter">🛒 Panier</a>
+                                <a href="panier.php?add=<?php echo $film['id']; ?>" class="btn-acheter">🛒 Panier</a>
                                 <a href="film_details.php?id=<?php echo $film['id']; ?>" class="btn-details">Détails</a>
                             </div>
                         </div>
@@ -63,6 +62,6 @@ $films = $req->fetchAll(PDO::FETCH_ASSOC);
         <?php endif; ?>
     </div>
 </main>
-
+ 
 </body>
 </html>

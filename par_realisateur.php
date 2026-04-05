@@ -2,24 +2,24 @@
 session_start();
 require_once 'configphp.php';
 
-
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     header("Location: index.php");
     exit();
 }
 
-$id_realisateur = $_GET['id'];
+$id_realisateur = intval($_GET['id']); 
 
 $reqRealisateur = $bdd->prepare("SELECT name FROM realisateurs WHERE id = :id");
-$reqRealisateur->execute(['id' => $id_realisateur]);
+$reqRealisateur->execute([':id' => $id_realisateur]);
 $realisateur = $reqRealisateur->fetch();
 
 if (!$realisateur) {
-    die("Réalisateur introuvable.");
+    header("Location: index.php");
+    exit();
 }
 
 $reqFilms = $bdd->prepare("SELECT * FROM films WHERE realisateur_id = :id ORDER BY Sortie DESC");
-$reqFilms->execute(['id' => $id_realisateur]);
+$reqFilms->execute([':id' => $id_realisateur]);
 $films = $reqFilms->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -45,11 +45,11 @@ $films = $reqFilms->fetchAll(PDO::FETCH_ASSOC);
         }
     </style>
 </head>
-<body>
+<body class="netflix-body">
 
-    <header class="netflix-nav">
+    <header class="netflix-header">
         <div class="logo">IMDb & co</div>
-        <nav class="nav-links">
+        <nav class="main-nav">
             <a href="index.php">Accueil</a>
             <a href="recherche.php">Recherche</a>
             <a href="Categorie.php">Catégories</a>
@@ -63,14 +63,14 @@ $films = $reqFilms->fetchAll(PDO::FETCH_ASSOC);
 
     <main class="main-content">
         <div class="movie-grid">
-            <?php if (count($films) > 0): ?>
+            <?php if (!empty($films)): ?>
                 <?php foreach ($films as $f): ?>
                     <div class="movie-card">
                         <a href="film_details.php?id=<?php echo $f['id']; ?>">
                             <img src="assets/img/<?php echo htmlspecialchars($f['image']); ?>" alt="<?php echo htmlspecialchars($f['titre']); ?>">
                             <div class="card-details">
                                 <h3><?php echo htmlspecialchars($f['titre']); ?></h3>
-                                <p class="price"><?php echo $f['prix']; ?>€</p>
+                                <p class="price"><?php echo number_format($f['prix'], 2); ?>€</p>
                                 <span class="btn-add-mini">Voir détails</span>
                             </div>
                         </a>

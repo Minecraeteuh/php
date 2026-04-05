@@ -4,36 +4,39 @@ require_once 'configphp.php';
 
 $resultats = [];
 $recherche_faite = false;
+$query = '';
 
 if (isset($_GET['query']) && !empty(trim($_GET['query']))) {
     $recherche_faite = true;
-    $query = $_GET['query'];
-    $type = $_GET['type']; 
+    $query = trim($_GET['query']);
+
+    // Validation du type pour éviter les injections
+    $typesAutorises = ['titre', 'realisateur'];
+    $type = in_array($_GET['type'] ?? '', $typesAutorises) ? $_GET['type'] : 'titre';
 
     if ($type == 'titre') {
-        $sql = "SELECT films.*, realisateurs.name AS nom_realisateur 
-                FROM films 
-                LEFT JOIN realisateurs ON films.realisateur_id = realisateurs.id 
+        $sql = "SELECT films.*, realisateurs.name AS nom_realisateur
+                FROM films
+                LEFT JOIN realisateurs ON films.realisateur_id = realisateurs.id
                 WHERE films.titre LIKE :search";
     } else {
-        $sql = "SELECT films.*, realisateurs.name AS nom_realisateur 
-                FROM films 
-                LEFT JOIN realisateurs ON films.realisateur_id = realisateurs.id 
+        $sql = "SELECT films.*, realisateurs.name AS nom_realisateur
+                FROM films
+                LEFT JOIN realisateurs ON films.realisateur_id = realisateurs.id
                 WHERE realisateurs.name LIKE :search";
     }
 
     $req = $bdd->prepare($sql);
-    $req->execute(['search' => '%' . $query . '%']);
+    $req->execute([':search' => '%' . $query . '%']);
     $resultats = $req->fetchAll(PDO::FETCH_ASSOC);
 }
-
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Recherche IMDb & co</title>
+    <title>Recherche - IMDb & co</title>
     <link rel="stylesheet" href="CSS/recherche.css">
 </head>
 <body>
@@ -52,15 +55,15 @@ if (isset($_GET['query']) && !empty(trim($_GET['query']))) {
 <div class="search-container">
     <h2>Trouver un film</h2>
     <form action="recherche.php" method="GET">
-        <input type="text" name="query" placeholder="Titre ou réalisateur..." required 
-               value="<?php echo isset($_GET['query']) ? htmlspecialchars($_GET['query']) : ''; ?>" 
+        <input type="text" name="query" placeholder="Titre ou réalisateur..." required
+               value="<?php echo htmlspecialchars($query); ?>"
                style="width: 50%; padding: 10px; border-radius: 5px; border: none;">
-        
+
         <select name="type" style="padding: 10px; border-radius: 5px;">
-            <option value="titre" <?php if(isset($_GET['type']) && $_GET['type'] == 'titre') echo 'selected'; ?>>Par Titre</option>
-            <option value="realisateur" <?php if(isset($_GET['type']) && $_GET['type'] == 'realisateur') echo 'selected'; ?>>Par Réalisateur</option>
+            <option value="titre" <?php if(($_GET['type'] ?? '') == 'titre') echo 'selected'; ?>>Par Titre</option>
+            <option value="realisateur" <?php if(($_GET['type'] ?? '') == 'realisateur') echo 'selected'; ?>>Par Réalisateur</option>
         </select>
-        
+
         <button type="submit" style="padding: 10px 20px; background: #e50914; color: white; border: none; border-radius: 5px; cursor: pointer;">Rechercher</button>
     </form>
 </div>
@@ -71,7 +74,7 @@ if (isset($_GET['query']) && !empty(trim($_GET['query']))) {
             <?php if (!empty($resultats)): ?>
                 <?php foreach ($resultats as $film): ?>
                     <div class="poster-container">
-                        <img src="assets/img/<?php echo $film['image']; ?>" alt="<?php echo htmlspecialchars($film['titre']); ?>">
+                        <img src="assets/img/<?php echo htmlspecialchars($film['image']); ?>" alt="<?php echo htmlspecialchars($film['titre']); ?>">
                         <h3><?php echo htmlspecialchars($film['titre']); ?></h3>
                         <p><strong>Réalisateur :</strong> <?php echo htmlspecialchars($film['nom_realisateur'] ?? 'Inconnu'); ?></p>
                         <p><strong>Année :</strong> <?php echo htmlspecialchars($film['Sortie']); ?></p>

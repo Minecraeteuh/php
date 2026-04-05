@@ -5,7 +5,7 @@ require_once 'configphp.php';
 $user = null;
 if (isset($_COOKIE['email']) && isset($_COOKIE['token'])) {
     $reqUser = $bdd->prepare("SELECT * FROM users WHERE email = :email AND token = :token");
-    $reqUser->execute(['email' => $_COOKIE['email'], 'token' => $_COOKIE['token']]);
+    $reqUser->execute([':email' => $_COOKIE['email'], ':token' => $_COOKIE['token']]);
     $user = $reqUser->fetch(PDO::FETCH_ASSOC);
 }
 
@@ -15,7 +15,7 @@ if (!$user) {
 }
 
 $reqAchats = $bdd->prepare("SELECT date_achat, prix_achat FROM achats WHERE user_id = :user_id ORDER BY date_achat DESC");
-$reqAchats->execute(['user_id' => $user['id']]);
+$reqAchats->execute([':user_id' => $user['id']]);
 $mes_achats = $reqAchats->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -37,17 +37,31 @@ $mes_achats = $reqAchats->fetchAll(PDO::FETCH_ASSOC);
             <a href="Categorie.php"><img src="assets/logo/categorie.svg" alt="categorie" class="nav-icon">Catégories</a>
         </nav>
         <div class="user-nav">
-             <a href="panier.php" class="cart-link"><img src="assets/logo/cart.svg" alt="Panier" class="nav-icon"></a>
-             <a href="profil.php" class="pseudo-link">
+            <a href="panier.php" class="cart-link"><img src="assets/logo/cart.svg" alt="Panier" class="nav-icon"></a>
+            <a href="profil.php" class="pseudo-link">
                 <img src="assets/logo/account.svg" alt="Profil" class="nav-icon">
                 <?php echo htmlspecialchars($user['pseudo']); ?>
-             </a>
-             <a href="deconnexion.php" class="btn-logout">Quitter</a>
+            </a>
+            <a href="deconnexion.php" class="btn-logout">Quitter</a>
         </div>
     </header>
 
     <main class="profil-container">
         <h1 class="row-title">Mon Profil</h1>
+
+        <?php if (isset($_GET['success'])): ?>
+            <div class="alert alert-success">Mot de passe mis à jour avec succès !</div>
+        <?php elseif (isset($_GET['error'])): ?>
+            <?php if ($_GET['error'] === 'empty'): ?>
+                <div class="alert alert-error">Le mot de passe ne peut pas être vide.</div>
+            <?php elseif ($_GET['error'] === 'short'): ?>
+                <div class="alert alert-error">Le mot de passe doit faire au moins 6 caractères.</div>
+            <?php endif; ?>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['order_success'])): ?>
+            <div class="alert alert-success">Votre commande a bien été enregistrée !</div>
+        <?php endif; ?>
 
         <div class="profil-grid">
             <section class="profil-card">
@@ -63,8 +77,8 @@ $mes_achats = $reqAchats->fetchAll(PDO::FETCH_ASSOC);
                 <h2>Sécurité</h2>
                 <form action="traitement_profil.php" method="POST">
                     <div class="input-group">
-                        <label>Nouveau mot de passe</label>
-                        <input type="password" name="new_password" placeholder="••••••••" required>
+                        <label>Nouveau mot de passe (6 caractères minimum)</label>
+                        <input type="password" name="new_password" placeholder="••••••••" required minlength="6">
                     </div>
                     <button type="submit" name="change_pwd" class="btn-red">Mettre à jour</button>
                 </form>
@@ -90,5 +104,6 @@ $mes_achats = $reqAchats->fetchAll(PDO::FETCH_ASSOC);
             <?php endif; ?>
         </section>
     </main>
+
 </body>
 </html>

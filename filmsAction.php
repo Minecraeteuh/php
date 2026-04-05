@@ -2,8 +2,6 @@
 session_start();
 require_once 'configphp.php';
 
-
-
 $req = $bdd->prepare("
     SELECT films.*, realisateurs.name AS nom_realisateur
     FROM films
@@ -54,7 +52,7 @@ $films = $req->fetchAll(PDO::FETCH_ASSOC);
                             <p><?php echo htmlspecialchars($film['nom_realisateur'] ?? 'Inconnu'); ?></p>
                             <span class="price"><?php echo number_format($film['prix'], 2); ?> €</span>
                             <div class="card-buttons">
-                                <a href="ajouter_panier.php?id=<?php echo $film['id']; ?>" class="btn-acheter">🛒 Panier</a>
+                                <a href="panier.php?add=<?php echo $film['id']; ?>" class="btn-acheter">🛒 Panier</a>
                                 <a href="film_details.php?id=<?php echo $film['id']; ?>" class="btn-details">Détails</a>
                             </div>
                         </div>
