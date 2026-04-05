@@ -7,7 +7,7 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
     exit();
 }
 
-$id_realisateur = intval($_GET['id']); 
+$id_realisateur = intval($_GET['id']);
 
 $reqRealisateur = $bdd->prepare("SELECT name FROM realisateurs WHERE id = :id");
 $reqRealisateur->execute([':id' => $id_realisateur]);
@@ -28,26 +28,11 @@ $films = $reqFilms->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <title>Films de <?php echo htmlspecialchars($realisateur['name']); ?> - IMDb & co</title>
-    <link rel="stylesheet" href="CSS/index.css">
-    <style>
-        .director-header {
-            padding: 120px 5% 40px;
-            background: linear-gradient(to bottom, #181818, #0f0f0f);
-            text-align: center;
-        }
-        .director-header h1 {
-            font-size: 3rem;
-            color: var(--netflix-red);
-        }
-        .movie-count {
-            color: var(--text-gray);
-            font-size: 1.1rem;
-        }
-    </style>
+    <link rel="stylesheet" href="CSS/par_realisateur.css">
 </head>
-<body class="netflix-body">
+<body>
 
-    <header class="netflix-header">
+    <header>
         <div class="logo">IMDb & co</div>
         <nav class="main-nav">
             <a href="index.php">Accueil</a>
@@ -62,12 +47,13 @@ $films = $reqFilms->fetchAll(PDO::FETCH_ASSOC);
     </section>
 
     <main class="main-content">
-        <div class="movie-grid">
+        <div class="film-grid">
             <?php if (!empty($films)): ?>
                 <?php foreach ($films as $f): ?>
                     <div class="movie-card">
                         <a href="film_details.php?id=<?php echo $f['id']; ?>">
-                            <img src="assets/img/<?php echo htmlspecialchars($f['image']); ?>" alt="<?php echo htmlspecialchars($f['titre']); ?>">
+                            <img src="assets/img/<?php echo htmlspecialchars($f['image']); ?>"
+                                 alt="<?php echo htmlspecialchars($f['titre']); ?>">
                             <div class="card-details">
                                 <h3><?php echo htmlspecialchars($f['titre']); ?></h3>
                                 <p class="price"><?php echo number_format($f['prix'], 2); ?>€</p>
