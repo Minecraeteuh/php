@@ -25,12 +25,12 @@ mysql -u root -p
 
 4. Créer la base de données :
 ```sql
-CREATE DATABASE utilisateurs;
-USE utilisateurs;
+CREATE DATABASE movie;
+USE movie;
 ```
-5. Importer le fichier `database.sql` :
+5. Importer le fichier `baseDeDonnees.sql` :
 ```bash
-mysql -u root -p utilisateurs < base de donnée.sql // ce dossier se trouve dans le sous dossier ('sql') du projet sinon vous pouvez copier coller le contenant du fichier sql et le mysql en ligne de code
+mysql -u root -p utilisateurs < baseDeDonnees.sql // ce dossier se trouve dans le sous dossier ('sql') du projet sinon vous pouvez copier coller le contenant du fichier sql et le mysql en ligne de code
 ```
 6. Ouvrir `configphp.php` et vérifier les paramètres de connexion (voir ci-dessous)
 7. Accéder au site : [http://localhost/nom_du_dossier/index.php]
@@ -41,14 +41,14 @@ mysql -u root -p utilisateurs < base de donnée.sql // ce dossier se trouve dans
 $servername = "localhost";
 $username   = "root";       // votre username MySQL
 $password   = "";           // votre mot de passe MySQL
-$dbname     = "utilisateurs";
+$dbname     = "movie";
 ```
 
 ---
 
 ## Schéma de la base de données
 
-Base de données : `utilisateurs`
+Base de données : `movie`
 
 ### Table `users`
 Stocke les comptes utilisateurs. Le mot de passe est hashé avec `password_hash()`.
@@ -187,8 +187,7 @@ Historique des commandes, accessible depuis la page Profil.
 │   ├── inscription.css
 │   ├── recherche.css
 │   ├── categorie.css
-│   ├── filmsAction.css
-│   ├── filmsDrame.css
+│   ├── categorie2.css
 │   ├── details.css
 │   ├── panier.css
 │   └── profil.css
