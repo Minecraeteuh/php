@@ -91,7 +91,7 @@ if (!$film) {
 
                 <div class="actions">
                     <a href="panier.php?add=<?php echo $film['id']; ?>" class="btn-acheter">
-                        🛒 Ajouter au panier - <?php echo number_format($film['prix'], 2); ?>€
+                        Ajouter au panier - <?php echo number_format($film['prix'], 2); ?>€
                     </a>
                 </div>
             </div>

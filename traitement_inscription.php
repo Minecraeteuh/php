@@ -9,7 +9,6 @@ if (isset($_POST['ok'])) {
     $email    = trim($_POST['email']);
     $password = $_POST['password'];
 
-    // Validation basique
     if (empty($nom) || empty($prenom) || empty($username) || empty($email) || empty($password)) {
         header("Location: inscription.php?error=empty");
         exit();

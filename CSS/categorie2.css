@@ -23,7 +23,6 @@ body {
   min-height: 100vh;
 }
 
-
 header {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -44,85 +43,66 @@ header {
   letter-spacing: 2px;
 }
 
-nav ul {
+.utilisateur-nav {
   display: flex;
-  gap: 28px;
-  list-style: none;
+  align-items: center;
+  gap: 25px;
 }
 
-nav ul a {
-  color: var(--text-muted);
+.utilisateur-nav a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   text-decoration: none;
-  font-size: 13px;
+  color: var(--text-muted);
+  font-size: 14px;
   font-weight: 500;
-  letter-spacing: 0.5px;
   transition: color 0.2s;
 }
 
-nav ul a:hover { color: #fff; }
+.utilisateur-nav a:hover {
+  color: #fff;
+}
 
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  filter: invert(1);
+}
 
 .container {
-  margin-top: 68px;
-  padding: 50px 4% 60px;
+  padding: 100px 4% 50px;
 }
 
 .container h2 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 2.8rem;
-  letter-spacing: 3px;
-  color: #fff;
-  margin-bottom: 8px;
+  font-size: 2.5rem;
+  margin-bottom: 5px;
 }
 
 .subtitle {
-  font-size: 14px;
   color: var(--text-muted);
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
-
-.empty {
-  color: var(--text-muted);
-  font-size: 15px;
-  padding: 60px 0;
-  text-align: center;
-}
-
 
 .film-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
 }
-
-@media (max-width: 600px) {
-  .film-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-}
-
 
 .poster-container {
   position: relative;
+  background: var(--surface);
   border-radius: 6px;
   overflow: hidden;
-  background: var(--surface);
-  transition: transform 0.3s cubic-bezier(.25,.46,.45,.94), box-shadow 0.3s;
-}
-
-.poster-container:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 36px rgba(0,0,0,0.8);
-  z-index: 10;
-}
-
-.poster-container > a {
-  display: block;
-  position: relative;
-  text-decoration: none;
+  aspect-ratio: 2/3;
 }
 
 .poster-container img {
   width: 100%;
-  aspect-ratio: 2/3;
+  height: 100%;
   object-fit: cover;
   display: block;
   background: #222;
@@ -132,7 +112,6 @@ nav ul a:hover { color: #fff; }
 .poster-container:hover img {
   filter: brightness(0.4);
 }
-
 
 .overlay {
   position: absolute;
@@ -177,36 +156,36 @@ nav ul a:hover { color: #fff; }
 
 .card-buttons {
   display: flex;
-  gap: 6px;
+  gap: 8px;
 }
 
-.btn-acheter,
-.btn-details {
+.btn-acheter, .btn-details {
   flex: 1;
   text-align: center;
-  padding: 7px 6px;
-  font-size: 11px;
-  font-weight: 600;
+  padding: 8px 0;
   border-radius: var(--radius);
+  font-size: 12px;
+  font-weight: 600;
   text-decoration: none;
-  letter-spacing: 0.3px;
   transition: background 0.2s, color 0.2s;
 }
 
 .btn-acheter {
-  background: rgba(255,255,255,0.12);
+  background: var(--red);
   color: #fff;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid var(--red);
 }
+
 .btn-acheter:hover {
-  background: rgba(255,255,255,0.22);
+  background: var(--red-dark);
 }
 
 .btn-details {
-  background: var(--red);
+  background: rgba(255,255,255,0.1);
   color: #fff;
-  border: 1px solid transparent;
+  border: 1px solid rgba(255,255,255,0.2);
 }
+
 .btn-details:hover {
-  background: var(--red-dark);
+  background: rgba(255,255,255,0.2);
 }

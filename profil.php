@@ -36,7 +36,7 @@ $mes_achats = $reqAchats->fetchAll(PDO::FETCH_ASSOC);
             <a href="recherche.php"><img src="assets/logo/search.svg" alt="search" class="nav-icon">Recherche</a>
             <a href="Categorie.php"><img src="assets/logo/categorie.svg" alt="categorie" class="nav-icon">Catégories</a>
         </nav>
-        <div class="user-nav">
+        <div class="utilisateur-nav">
             <a href="panier.php" class="cart-link"><img src="assets/logo/cart.svg" alt="Panier" class="nav-icon"></a>
             <a href="profil.php" class="pseudo-link">
                 <img src="assets/logo/account.svg" alt="Profil" class="nav-icon">

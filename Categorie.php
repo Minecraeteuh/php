@@ -16,11 +16,11 @@ require_once 'configphp.php';
     <header>
         <h1>IMDb & co</h1>
         <nav>
-        <ul class="user-nav">
-            <li><a href="index.php"><img src="assets/logo/home.svg" alt="home" class="home-icon-svg">Accueil</a></li>
-            <li><a href="recherche.php"><img src="assets/logo/search.svg" alt="search" class="search-icon-svg">Rechercher</a></li>
-            <li><a href="panier.php"><img src="assets/logo/cart.svg" alt="Panier" class="cart-icon-svg">Panier</a></li>
-        </ul> 
+        <div class="utilisateur-nav">
+            <a href="index.php" class="nav-icon-link"><img src="assets/logo/home.svg" alt="home" class="nav-icon">Accueil</a>
+            <a href="recherche.php" class="nav-icon-link"><img src="assets/logo/search.svg" alt="search" class="nav-icon">Rechercher</a>
+            <a href="panier.php" class="cart-link"><img src="assets/logo/cart.svg" alt="Panier" class="cart-icon">Panier</a>
+        </div>
         </nav>
     </header>
 

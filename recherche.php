@@ -10,7 +10,6 @@ if (isset($_GET['query']) && !empty(trim($_GET['query']))) {
     $recherche_faite = true;
     $query = trim($_GET['query']);
 
-    // Validation du type pour éviter les injections
     $typesAutorises = ['titre', 'realisateur'];
     $type = in_array($_GET['type'] ?? '', $typesAutorises) ? $_GET['type'] : 'titre';
 

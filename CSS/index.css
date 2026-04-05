@@ -71,10 +71,31 @@ body.netflix-body {
 
 .main-nav a:hover { color: #fff; }
 
-.user-nav {
+.utilisateur-nav {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 20px;
+}
+
+.utilisateur-nav a.cart-link,
+.utilisateur-nav a.pseudo-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--text);
+  transition: color 0.2s;
+}
+
+.utilisateur-nav a:hover {
+  color: #fff;
+}
+
+.cart-icon, .profile-icon, .nav-icon {
+    width: 20px;
+    height: 20px;
+    display: block;
+    filter: invert(1);
 }
 
 .profile-icon-svg, 
@@ -82,13 +103,6 @@ body.netflix-body {
 .pseudo {
   vertical-align: middle;
 }
-
-.user-nav .icon {
-  font-size: 18px;
-  opacity: 0.85;
-  transition: opacity 0.2s;
-}
-.user-nav .icon:hover { opacity: 1; }
 
 .pseudo {
   font-size: 13px;
@@ -332,5 +346,5 @@ body.netflix-body {
     width: 20px;
     height: 20px;
     display: block;
-    filter: invert(1);    /* Pour que l'icône soit blanche */
+    filter: invert(1);
 }
